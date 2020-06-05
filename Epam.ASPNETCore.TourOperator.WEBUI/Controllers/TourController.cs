@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Epam.ASPNETCore.TourOperator.Models;
 using Epam.ASPNETCore.TourOperator.IBLL;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Epam.ASPNETCore.TourOperator.WEBUI.Models;
 
 namespace Epam.ASPNETCore.TourOperator.Controllers
 {
@@ -24,8 +27,27 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
 
         public IActionResult Index()
         {
-            var r = tourLogic.GetTours();
-            return View();
+            var r = tourLogic.GetTours().ToList().FirstOrDefault().Image;
+            return View(new CreatePost() { Image = r});
+        }
+
+        [HttpPost]
+        public IActionResult Index(CreatePost model)
+        {
+            var img = model.MyImage;
+            var imgCaption = model.ImageCaption;
+            var fileName = Path.GetFileName(model.MyImage.FileName);
+            var contentType = model.MyImage.ContentType;
+            string imgBase64;
+            byte[] bytearr;
+
+            if (model.MyImage != null)
+            {
+                bytearr = GetByteArrayFromImage(model.MyImage);
+                imgBase64 = Convert.ToBase64String(bytearr);
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult Privacy()
@@ -37,6 +59,15 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private byte[] GetByteArrayFromImage(IFormFile file)
+        {
+            using (var target = new MemoryStream())
+            {
+                file.CopyTo(target);
+                return target.ToArray();
+            }
         }
     }
 }

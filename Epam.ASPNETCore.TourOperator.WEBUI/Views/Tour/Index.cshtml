@@ -1,8 +1,22 @@
-﻿@{
+﻿@using Epam.ASPNETCore.TourOperator.WEBUI.Models
+@model CreatePost
+@{
     ViewData["Title"] = "Tour Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <form asp-action="Index" enctype="multipart/form-data">
+
+        <input asp-for="ImageCaption" />
+        <input asp-for="ImageDescription" />
+        <input asp-for="MyImage" accept="image/*" />
+
+        <input type="submit" />
+    </form>
 </div>
+<a href="#">
+    @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64," + @Model.Image + "\" />")
+</a>

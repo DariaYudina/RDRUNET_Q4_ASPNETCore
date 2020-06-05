@@ -16,6 +16,8 @@ namespace Epam.ASPNETCore.TourOperator.Entities
 
         public DateTime EndDate { get; set; }
 
+        public string Image { get; set; }
+
         public City City { get; set; }
 
         public Region Region { get; set; }

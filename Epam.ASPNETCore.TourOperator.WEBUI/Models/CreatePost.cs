@@ -1,0 +1,17 @@
+﻿using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Epam.ASPNETCore.TourOperator.WEBUI.Models
+{
+    public class CreatePost
+    {
+        public string ImageCaption { set; get; }
+        public string ImageDescription { set; get; }
+        public IFormFile MyImage { set; get; }
+        public string Image { set; get; }
+
+    }
+}

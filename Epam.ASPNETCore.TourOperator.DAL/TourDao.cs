@@ -26,6 +26,7 @@ namespace Epam.ASPNETCore.TourOperator.DAL
                         t.[Cost],
                         t.[StartDate],
                         t.[EndDate],
+                        t.[Image],
                         c.[City_Id],
                         c.[Region_Id],
                         c.[Title],
