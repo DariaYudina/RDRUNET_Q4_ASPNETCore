@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Epam.ASPNETCore.TourOperator.BLL;
+using Epam.ASPNETCore.TourOperator.DAL;
+using Epam.ASPNETCore.TourOperator.IBLL;
+using Epam.ASPNETCore.TourOperator.IDAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +28,12 @@ namespace Epam.ASPNETCore.TourOperator.WEBUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSingleton<ITourLogic, TourLogic>();
+            services.AddSingleton<ITourDao, TourDao>(provider => new TourDao(Configuration.GetConnectionString("TourDB")));
+            string r = Configuration.GetConnectionString("TourDB");
+            //string connectionString = "Server=.\\SQLEXPRESS;Initial Catalog=userstore;Integrated Security=True";
+            //services.AddTransient<IUserRepository, UserRepository>(provider => new UserRepository(connectionString));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

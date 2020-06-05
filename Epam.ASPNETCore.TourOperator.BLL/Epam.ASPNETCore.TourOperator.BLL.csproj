@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Epam.ASPNETCore.TourOperator.IBLL\Epam.ASPNETCore.TourOperator.IBLL.csproj" />
+    <ProjectReference Include="..\Epam.ASPNETCore.TourOperator.IDAL\Epam.ASPNETCore.TourOperator.IDAL.csproj" />
+  </ItemGroup>
+
+</Project>

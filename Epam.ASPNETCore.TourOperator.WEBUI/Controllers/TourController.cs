@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Epam.ASPNETCore.TourOperator.Models;
+using Epam.ASPNETCore.TourOperator.IBLL;
 
 namespace Epam.ASPNETCore.TourOperator.Controllers
 {
@@ -13,13 +14,17 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
     {
         private readonly ILogger<TourController> _logger;
 
-        public TourController(ILogger<TourController> logger)
+        private readonly ITourLogic tourLogic;
+
+        public TourController(ILogger<TourController> logger, ITourLogic tourLogic)
         {
             _logger = logger;
+            this.tourLogic = tourLogic;
         }
 
         public IActionResult Index()
         {
+            var r = tourLogic.GetTours();
             return View();
         }
 
