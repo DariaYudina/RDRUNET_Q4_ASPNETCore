@@ -11,7 +11,9 @@ namespace Epam.ASPNETCore.TourOperator.WEBUI.Models
         public string ImageCaption { set; get; }
         public string ImageDescription { set; get; }
         public IFormFile MyImage { set; get; }
-        public string Image { set; get; }
+      
+        private string image;
+        public string Image { set => image = value; get => "data:image/jpg;base64," + image; }
 
     }
 }

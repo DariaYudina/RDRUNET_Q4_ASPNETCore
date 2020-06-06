@@ -19,16 +19,32 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
 
         private readonly ITourLogic tourLogic;
 
-        public TourController(ILogger<TourController> logger, ITourLogic tourLogic)
+        private readonly ICountryLogic countryLogic;
+
+        private readonly IRegionLogic regionLogic;
+
+        private readonly ICityLogic cityLogic;
+
+
+        public TourController(ILogger<TourController> logger, 
+            ITourLogic tourLogic, 
+            ICountryLogic countryLogic,
+            IRegionLogic regionLogic,
+            ICityLogic cityLogic)
         {
             _logger = logger;
             this.tourLogic = tourLogic;
+            this.countryLogic = countryLogic;
+            this.regionLogic = regionLogic;
+            this.cityLogic = cityLogic;
         }
 
         public IActionResult Index()
         {
             var r = tourLogic.GetTours().ToList().FirstOrDefault().Image;
+            //var r2 = cityLogic.GetCities();
             return View(new CreatePost() { Image = r});
+            //return View();
         }
 
         [HttpPost]
@@ -47,6 +63,8 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
                 imgBase64 = Convert.ToBase64String(bytearr);
             }
 
+            //ViewBag.Companies = new SelectList(companies, "Id", "Name");
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -59,6 +77,13 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Search(CreatePost model)
+        {
+            return View();
         }
 
         private byte[] GetByteArrayFromImage(IFormFile file)

@@ -14,20 +14,27 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #nullable restore
 #line 1 "C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\Views\_ViewImports.cshtml"
-using Epam.ASPNETCore.TourOperator;
+using Epam.ASPNETCore.TourOperator.WEBUI;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 2 "C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\Views\_ViewImports.cshtml"
+using Epam.ASPNETCore.TourOperator.WEBUI.Models;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 3 "C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\Views\_ViewImports.cshtml"
 using Epam.ASPNETCore.TourOperator.Models;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7091c65830b0329e613be026ede8a57552863778", @"/Views/_ViewStart.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"12ff2348e769e35ceae2e4656e372f3e7604182a", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b49652fdfadfd6fedb9f439a749bf7d85b6f70bc", @"/Views/_ViewImports.cshtml")]
     public class Views__ViewStart : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

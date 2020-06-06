@@ -22,25 +22,25 @@ namespace Epam.ASPNETCore.TourOperator.DAL
         public IEnumerable<Tour> GetTours()
         {
             var query = @"SELECT
-                        t.[Tour_Id], 
-                        t.[Cost],
-                        t.[StartDate],
-                        t.[EndDate],
-                        t.[Image],
-                        c.[City_Id],
-                        c.[Region_Id],
-                        c.[Title],
-                        r.Region_Id,
-                        r.[Country_Id],
-                        r.[Title],
-                        co.[Country_Id],
-                        co.[Title]
-                        FROM Tours as t
-                        JOIN Cities AS c on t.City_Id = c.[City_Id]
-                        JOIN Regions AS r on c.Region_Id = r.Region_Id
-                        JOIN Countries AS co on r.Country_Id = co.Country_Id";
+                t.[Tour_Id], 
+                t.[Cost],
+                t.[StartDate],
+                t.[EndDate],
+                t.[Image],
+                c.[City_Id],
+                c.[Region_Id],
+                c.[Title],
+                r.Region_Id,
+                r.[Country_Id],
+                r.[Title],
+                co.[Country_Id],
+                co.[Title]
+                FROM Tours as t
+                JOIN Cities AS c on t.City_Id = c.[City_Id]
+                JOIN Regions AS r on c.Region_Id = r.Region_Id
+                JOIN Countries AS co on r.Country_Id = co.Country_Id";
 
-            using (var connection = new SqlConnection(connectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var result = connection.Query<Tour, City, Region, Country, Tour>(query,
                     (t, c, r, co) =>
@@ -58,9 +58,9 @@ namespace Epam.ASPNETCore.TourOperator.DAL
         public Tour GetTourById(int id)
         {
             var query = "SELECT * FROM Tours WHERE Tour_Id = @id";
-            using (IDbConnection db = new SqlConnection(connectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                return db.Query<Tour>(query, new { id }).FirstOrDefault();
+                return connection.Query<Tour>(query, new { id }).FirstOrDefault();
             }
         }
     }

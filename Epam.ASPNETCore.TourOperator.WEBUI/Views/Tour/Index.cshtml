@@ -1,22 +1,73 @@
-﻿@using Epam.ASPNETCore.TourOperator.WEBUI.Models
-@model CreatePost
+﻿@model CreatePost
 @{
     ViewData["Title"] = "Tour Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div @*class="text-center"*@>
+    <h5 class="display-6">Случайные предложения</h5>
 
-    <form asp-action="Index" enctype="multipart/form-data">
+    @*<form asp-action="Index" enctype="multipart/form-data">
 
         <input asp-for="ImageCaption" />
         <input asp-for="ImageDescription" />
         <input asp-for="MyImage" accept="image/*" />
 
         <input type="submit" />
+    </form>*@
+    <div class="cards">
+        <div class="mycard ">
+            <a href="#">
+                <img src="@Model.Image" asp-append-version="true"/>
+            </a>
+        </div>
+        <div class="mycard ">
+            <a href="#" >
+                <img src="@Model.Image" asp-append-version="true"/>
+            </a>
+        </div>
+        <div class="mycard ">
+            <a href="#">
+                <img src="@Model.Image" asp-append-version="true" />
+            </a>
+        </div>
+        <div class="mycard">
+            <ul>
+                <li>Турция</li>
+            </ul>
+        </div>
+    </div>
+    <h5 class="display-6">Расширенный поиск</h5>
+    <form asp-action="Search" asp-controller="Tour" asp-antiforgery="true" class="search-form">
+        <div class="selects">
+            @*<div>
+                <label asp-for=""></label>
+                <input type="text" asp-for="Name" />
+            </div>
+            <div>
+                <label asp-for="Price"></label>
+                <input asp-for="Price" />
+            </div>*@
+            <div class="select">
+                <label @*asp-for="CompanyId">*@</label>
+                <select @*asp-for="CompanyId" asp-items="ViewBag.Companies"*@></select>
+            </div>
+            <div class="select">
+                <label @*asp-for="CompanyId">*@</label>
+                <select @*asp-for="CompanyId" asp-items="ViewBag.Companies"*@></select>
+            </div>
+            <div class="select">
+                <label @*asp-for="CompanyId">*@</label>
+                <select @*asp-for="CompanyId" asp-items="ViewBag.Companies"*@></select>
+            </div>
+            @*<div>
+                <select asp-for="CompanyId" asp-items="ViewBag.Companies">
+                    <option selected="selected" disabled="disabled">Выберите компанию</option>
+                </select>
+            </div>*@
+        </div>
+        <div class="search-button">
+            <input type="submit" value="Search" />
+        </div>
     </form>
 </div>
-<a href="#">
-    @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64," + @Model.Image + "\" />")
-</a>
+

@@ -30,10 +30,12 @@ namespace Epam.ASPNETCore.TourOperator.WEBUI
             services.AddControllersWithViews();
             services.AddSingleton<ITourLogic, TourLogic>();
             services.AddSingleton<ITourDao, TourDao>(provider => new TourDao(Configuration.GetConnectionString("TourDB")));
-            string r = Configuration.GetConnectionString("TourDB");
-            //string connectionString = "Server=.\\SQLEXPRESS;Initial Catalog=userstore;Integrated Security=True";
-            //services.AddTransient<IUserRepository, UserRepository>(provider => new UserRepository(connectionString));
-
+            services.AddSingleton<ICountryLogic, CountryLogic>();
+            services.AddSingleton<ICountryDao, CountryDao>(provider => new CountryDao(Configuration.GetConnectionString("TourDB")));
+            services.AddSingleton<IRegionLogic, RegionLogic>();
+            services.AddSingleton<IRegionDao, RegionDao>(provider => new RegionDao(Configuration.GetConnectionString("TourDB")));
+            services.AddSingleton<ICityLogic, CityLogic>();
+            services.AddSingleton<ICityDao, CityDao>(provider => new CityDao(Configuration.GetConnectionString("TourDB")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -69,3 +69,35 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/*------------MySyles----------------------*/
+
+.cards{
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+}
+.mycard {
+    flex: 0 0 200px;
+    margin: 20px;
+}
+.mycard img{
+    width: 100%;
+    height:200px;
+    object-fit: cover;
+}
+.search-form{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+.selects {
+    display: flex;
+}
+.select{
+    margin: 10px;
+}
+.search-button {
+    align-self: flex-end;
+}
