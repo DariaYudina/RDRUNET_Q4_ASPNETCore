@@ -27,19 +27,19 @@
     <form asp-action="Search" asp-controller="Tour" asp-antiforgery="true" class="search-form">
         <div class="selects">
             @*<div>
-            <label asp-for=""></label>
-            <input type="text" asp-for="Name" />
-        </div>*@
+                    <label asp-for=""></label>
+                    <input type="text" asp-for="Name" />
+                </div>*@
             <div>
                 <label asp-for="Cost"></label>
                 <input asp-for="Cost" />
             </div>
-            <div class="select">
+            <div class="select countrySelect">
                 <select class="country" asp-for="CountryId" asp-items="Model.Countries">
                     <option selected="selected" disabled="disabled">Страны</option>
                 </select>
             </div>
-            <div class="select">
+            <div class="select regionSelect">
                 <select class="region" asp-for="RegionId" asp-items="Model.Regions">
                     <option selected="selected" disabled="disabled">Регионы</option>
                 </select>
@@ -54,12 +54,57 @@
             <input type="submit" value="Search" />
         </div>
     </form>
+
+    @*Добавление туров*@
     @*<form asp-action="Index" enctype="multipart/form-data">
 
-    <input asp-for="ImageCaption" />
-    <input asp-for="ImageDescription" />
-    <input asp-for="MyImage" accept="image/*" />
+            <input asp-for="ImageCaption" />
+            <input asp-for="ImageDescription" />
+            <input asp-for="MyImage" accept="image/*" />
 
-    <input type="submit" />
-</form>*@
+            <input type="submit" />
+        </form>*@
 </div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.countrySelect').on('change', '.country', function () {
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("GetRegionsByCountryId")",
+                    data: {countryId: $( ".country" ).val()},
+                    dataType: "json",
+                    success: function (data) {
+                        $('.region').empty();
+                        $('.region').append($('<option selected="selected" disabled="disabled">Регионы</option>'));
+                        $.each(data, function(key, entry) {
+	                        $('.region').append($('<option></option>').attr('value', entry.region_Id).text(entry.title));
+                        });
+                    },
+                    error: function (req, status, error) {
+                        alert(error);
+                    }
+                });
+            });
+            $('.regionSelect').on('change', '.region', function () {
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("GetCitiesByRegionId")",
+                    data: {regionId: $( ".region" ).val()},
+                    dataType: "json",
+                    success: function (data) {
+                        $('.city').empty();
+                        $('.city').append($('<option selected="selected" disabled="disabled">Города</option>'));
+                        $.each(data, function(key, entry) {
+	                        $('.city').append($('<option></option>').attr('value', entry.city_Id).text(entry.title));
+                        });
+                    },
+                    error: function (req, status, error) {
+                        alert(error);
+                    }
+                });
+            });
+        });
+    </script>
+}

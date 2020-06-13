@@ -15,9 +15,19 @@ namespace Epam.ASPNETCore.TourOperator.BLL
             this.regionDao = regionDao;
         }
 
+        public Region GetRegionById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Region> GetRegions()
         {
             return regionDao.GetRegions();
+        }
+
+        public IEnumerable<Region> GetRegionsByCountryId(int id)
+        {
+            return regionDao.GetRegionsByCountryId(id);
         }
     }
 }

@@ -21,10 +21,10 @@ namespace Epam.ASPNETCore.TourOperator.DAL
 
         public IEnumerable<Country> GetCountries()
         {
-            var query = "SELECT " +
-                "[Country_Id]," +
-                "[Title]"+
-                "FROM Countries";
+            var query = @"SELECT 
+                [Country_Id],
+                [Title]
+                FROM Countries";
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 return connection.Query<Country>(query);
@@ -33,7 +33,10 @@ namespace Epam.ASPNETCore.TourOperator.DAL
 
         public Country GetCountryById(int id)
         {
-            var query = "SELECT * FROM Countries WHERE Country_Id = @id";
+            var query = @"SELECT 
+                [Country_Id],
+                [Title]
+                FROM Countries WHERE Country_Id = @id";
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 return connection.Query<Country>(query, new { id }).FirstOrDefault();

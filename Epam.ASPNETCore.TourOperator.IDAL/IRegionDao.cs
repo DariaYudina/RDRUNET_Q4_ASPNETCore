@@ -9,5 +9,6 @@ namespace Epam.ASPNETCore.TourOperator.IDAL
     {
         IEnumerable<Region> GetRegions();
         Region GetRegionById(int id);
+        IEnumerable<Region> GetRegionsByCountryId(int id);
     }
 }

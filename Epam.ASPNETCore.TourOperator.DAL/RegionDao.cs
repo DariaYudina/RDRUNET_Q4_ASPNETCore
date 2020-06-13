@@ -21,7 +21,11 @@ namespace Epam.ASPNETCore.TourOperator.DAL
 
         public Region GetRegionById(int id)
         {
-            var query = "SELECT * FROM Regions WHERE Region_Id = @id";
+            var query = @"SELECT 
+                [Region_Id], 
+                [Country_Id],
+                [Title]
+                FROM Regions WHERE Region_Id = @id";
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 return connection.Query<Region>(query, new { id }).FirstOrDefault();
@@ -38,6 +42,19 @@ namespace Epam.ASPNETCore.TourOperator.DAL
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 return connection.Query<Region>(query);
+            }
+        }
+
+        public IEnumerable<Region> GetRegionsByCountryId(int id)
+        {
+            var query = @"SELECT 
+                [Region_Id], 
+                [Country_Id],
+                [Title]
+                FROM Regions WHERE Country_Id = @id";
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                return connection.Query<Region>(query, new { id });
             }
         }
     }

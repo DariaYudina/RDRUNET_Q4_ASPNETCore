@@ -8,5 +8,7 @@ namespace Epam.ASPNETCore.TourOperator.IBLL
     public interface ICityLogic
     {
         IEnumerable<City> GetCities();
+        City GetCityById(int id);
+        IEnumerable<City> GetCitiesByRegionId(int id);
     }
 }

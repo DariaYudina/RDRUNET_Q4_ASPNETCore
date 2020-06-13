@@ -57,7 +57,13 @@ namespace Epam.ASPNETCore.TourOperator.DAL
 
         public Tour GetTourById(int id)
         {
-            var query = "SELECT * FROM Tours WHERE Tour_Id = @id";
+            var query = @"SELECT  
+                [Tour_Id], 
+                [Cost],
+                [StartDate],
+                [EndDate],
+                [Image],
+                FROM Tours WHERE Tour_Id = @id";
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 return connection.Query<Tour>(query, new { id }).FirstOrDefault();

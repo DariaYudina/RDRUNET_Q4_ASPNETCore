@@ -92,6 +92,16 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult GetRegionsByCountryId(int countryId)
+        {
+            return Json(regionLogic.GetRegionsByCountryId(countryId));
+        }
+
+        public ActionResult GetCitiesByRegionId(int regionId)
+        {
+            return Json(cityLogic.GetCitiesByRegionId(regionId));
+        }
+
         public IActionResult Privacy()
         {
             return View();
