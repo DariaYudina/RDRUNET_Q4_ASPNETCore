@@ -40,12 +40,12 @@
                 </select>
             </div>
             <div class="select regionSelect">
-                <select class="region" asp-for="RegionId" asp-items="Model.Regions">
+                <select class="region" asp-for="RegionId" asp-items="Model.Regions" disabled>
                     <option selected="selected" disabled="disabled">Регионы</option>
                 </select>
             </div>
             <div class="select">
-                <select class="city" asp-for="CityId" asp-items="Model.Cities">
+                <select class="city" asp-for="CityId" asp-items="Model.Cities" disabled>
                     <option selected="selected" disabled="disabled">Города</option>
                 </select>
             </div>
@@ -81,6 +81,10 @@
                         $.each(data, function(key, entry) {
 	                        $('.region').append($('<option></option>').attr('value', entry.region_Id).text(entry.title));
                         });
+                        $('.region').removeAttr('disabled');
+                        $('.city').empty();
+                        $('.city').append($('<option selected="selected" disabled="disabled">Города</option>'));
+                        $('.city').prop( "disabled", true );;
                     },
                     error: function (req, status, error) {
                         alert(error);
@@ -99,6 +103,7 @@
                         $.each(data, function(key, entry) {
 	                        $('.city').append($('<option></option>').attr('value', entry.city_Id).text(entry.title));
                         });
+                        $('.city').removeAttr('disabled');
                     },
                     error: function (req, status, error) {
                         alert(error);
