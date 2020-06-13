@@ -8,5 +8,6 @@ namespace Epam.ASPNETCore.TourOperator.IDAL
     public interface ICityDao
     {
         IEnumerable<City> GetCities();
+        City GetCityById(int id);
     }
 }

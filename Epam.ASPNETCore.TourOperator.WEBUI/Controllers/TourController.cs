@@ -10,6 +10,8 @@ using Epam.ASPNETCore.TourOperator.IBLL;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using Epam.ASPNETCore.TourOperator.WEBUI.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using AutoMapper;
 
 namespace Epam.ASPNETCore.TourOperator.Controllers
 {
@@ -25,26 +27,48 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
 
         private readonly ICityLogic cityLogic;
 
+        private readonly IMapper mapper;
+
 
         public TourController(ILogger<TourController> logger, 
             ITourLogic tourLogic, 
             ICountryLogic countryLogic,
             IRegionLogic regionLogic,
-            ICityLogic cityLogic)
+            ICityLogic cityLogic,
+            IMapper mapper)
         {
             _logger = logger;
             this.tourLogic = tourLogic;
             this.countryLogic = countryLogic;
             this.regionLogic = regionLogic;
             this.cityLogic = cityLogic;
+            this.mapper = mapper;
         }
 
         public IActionResult Index()
         {
-            var r = tourLogic.GetTours().ToList().FirstOrDefault().Image;
-            //var r2 = cityLogic.GetCities();
-            return View(new CreatePost() { Image = r});
-            //return View();
+            var model = new SearchViewModel();
+
+            var rand = new Random();
+            var tours = tourLogic.GetTours().ToList();
+            List<int> randomNumbers = new List<int>();
+
+            var tourCount = 3;
+            for (int i = 0; i < tourCount; i++)
+            {
+                int number;
+                do
+                {
+                    number = rand.Next(0, tours.Count());
+                }
+                while (randomNumbers.Contains(number));
+                randomNumbers.Add(number);
+                model.RandomTours.Add(mapper.Map<TourViewModel>(tours[number]));
+            }
+            model.Regions = new SelectList(regionLogic.GetRegions().ToList(), "Region_Id", "Title");
+            model.Cities = new SelectList(cityLogic.GetCities().ToList(), "City_Id", "Title");
+            model.Countries = new SelectList(countryLogic.GetCountries().ToList(), "Country_Id", "Title");
+            return View(model);
         }
 
         [HttpPost]

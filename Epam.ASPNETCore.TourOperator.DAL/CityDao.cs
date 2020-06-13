@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Text;
 
 namespace Epam.ASPNETCore.TourOperator.DAL
@@ -28,6 +29,15 @@ namespace Epam.ASPNETCore.TourOperator.DAL
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 return connection.Query<City>(query);
+            }
+        }
+
+        public City GetCityById(int id)
+        {
+            var query = "SELECT * FROM Cities WHERE City_Id = @id";
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                return connection.Query<City>(query, new { id }).FirstOrDefault();
             }
         }
     }

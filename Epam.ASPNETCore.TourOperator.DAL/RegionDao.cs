@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Text;
 
 namespace Epam.ASPNETCore.TourOperator.DAL
@@ -18,7 +19,16 @@ namespace Epam.ASPNETCore.TourOperator.DAL
             this.connectionString = connectionString;
         }
 
-        public IEnumerable<Region> GetRegiones()
+        public Region GetRegionById(int id)
+        {
+            var query = "SELECT * FROM Regions WHERE Region_Id = @id";
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                return connection.Query<Region>(query, new { id }).FirstOrDefault();
+            }
+        }
+
+        public IEnumerable<Region> GetRegions()
         {
             var query = "SELECT " +
                 "[Region_Id]," +

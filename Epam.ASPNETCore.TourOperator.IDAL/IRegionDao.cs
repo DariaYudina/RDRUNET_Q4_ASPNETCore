@@ -7,6 +7,7 @@ namespace Epam.ASPNETCore.TourOperator.IDAL
 {
     public interface IRegionDao
     {
-        IEnumerable<Region> GetRegiones();
+        IEnumerable<Region> GetRegions();
+        Region GetRegionById(int id);
     }
 }

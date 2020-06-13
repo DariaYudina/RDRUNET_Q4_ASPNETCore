@@ -7,6 +7,6 @@ namespace Epam.ASPNETCore.TourOperator.IBLL
 {
     public interface IRegionLogic
     {
-        IEnumerable<Region> GetRegiones();
+        IEnumerable<Region> GetRegions();
     }
 }

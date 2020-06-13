@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Text;
 
 namespace Epam.ASPNETCore.TourOperator.DAL
@@ -27,6 +28,15 @@ namespace Epam.ASPNETCore.TourOperator.DAL
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 return connection.Query<Country>(query);
+            }
+        }
+
+        public Country GetCountryById(int id)
+        {
+            var query = "SELECT * FROM Countries WHERE Country_Id = @id";
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                return connection.Query<Country>(query, new { id }).FirstOrDefault();
             }
         }
     }

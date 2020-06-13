@@ -193,10 +193,12 @@ C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.
 C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll
 C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileSystemGlobbing.dll
 C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
-C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\obj\Debug\netcoreapp3.1\Epam.ASPNETCore.TourOperator.WEBUI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
 C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
 C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
 C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
 C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\obj\Debug\netcoreapp3.1\Epam.ASPNETCore.TourOperator.WEBUI.MvcApplicationPartsAssemblyInfo.cache

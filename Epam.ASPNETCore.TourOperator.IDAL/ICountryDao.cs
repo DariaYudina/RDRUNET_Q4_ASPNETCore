@@ -8,5 +8,6 @@ namespace Epam.ASPNETCore.TourOperator.IDAL
     public interface ICountryDao
     {
         IEnumerable<Country> GetCountries();
+        Country GetCountryById(int id);
     }
 }

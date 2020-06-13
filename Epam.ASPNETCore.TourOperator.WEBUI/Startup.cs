@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Epam.ASPNETCore.TourOperator.BLL;
 using Epam.ASPNETCore.TourOperator.DAL;
 using Epam.ASPNETCore.TourOperator.IBLL;
@@ -36,6 +37,7 @@ namespace Epam.ASPNETCore.TourOperator.WEBUI
             services.AddSingleton<IRegionDao, RegionDao>(provider => new RegionDao(Configuration.GetConnectionString("TourDB")));
             services.AddSingleton<ICityLogic, CityLogic>();
             services.AddSingleton<ICityDao, CityDao>(provider => new CityDao(Configuration.GetConnectionString("TourDB")));
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

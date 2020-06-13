@@ -1,4 +1,4 @@
-﻿@model CreatePost
+﻿@model SearchViewModel
 @{
     ViewData["Title"] = "Tour Page";
 }
@@ -6,30 +6,17 @@
 <div @*class="text-center"*@>
     <h5 class="display-6">Случайные предложения</h5>
 
-    @*<form asp-action="Index" enctype="multipart/form-data">
 
-        <input asp-for="ImageCaption" />
-        <input asp-for="ImageDescription" />
-        <input asp-for="MyImage" accept="image/*" />
-
-        <input type="submit" />
-    </form>*@
     <div class="cards">
-        <div class="mycard ">
-            <a href="#">
-                <img src="@Model.Image" asp-append-version="true"/>
-            </a>
-        </div>
-        <div class="mycard ">
-            <a href="#" >
-                <img src="@Model.Image" asp-append-version="true"/>
-            </a>
-        </div>
-        <div class="mycard ">
-            <a href="#">
-                <img src="@Model.Image" asp-append-version="true" />
-            </a>
-        </div>
+
+        @foreach (var tour in Model.RandomTours)
+        {
+            <div class="mycard ">
+                <a href="#">
+                    <img src="@tour.Image" asp-append-version="true" />
+                </a>
+            </div>
+        }
         <div class="mycard">
             <ul>
                 <li>Турция</li>
@@ -40,34 +27,39 @@
     <form asp-action="Search" asp-controller="Tour" asp-antiforgery="true" class="search-form">
         <div class="selects">
             @*<div>
-                <label asp-for=""></label>
-                <input type="text" asp-for="Name" />
-            </div>
+            <label asp-for=""></label>
+            <input type="text" asp-for="Name" />
+        </div>*@
             <div>
-                <label asp-for="Price"></label>
-                <input asp-for="Price" />
-            </div>*@
-            <div class="select">
-                <label @*asp-for="CompanyId">*@</label>
-                <select @*asp-for="CompanyId" asp-items="ViewBag.Companies"*@></select>
+                <label asp-for="Cost"></label>
+                <input asp-for="Cost" />
             </div>
             <div class="select">
-                <label @*asp-for="CompanyId">*@</label>
-                <select @*asp-for="CompanyId" asp-items="ViewBag.Companies"*@></select>
-            </div>
-            <div class="select">
-                <label @*asp-for="CompanyId">*@</label>
-                <select @*asp-for="CompanyId" asp-items="ViewBag.Companies"*@></select>
-            </div>
-            @*<div>
-                <select asp-for="CompanyId" asp-items="ViewBag.Companies">
-                    <option selected="selected" disabled="disabled">Выберите компанию</option>
+                <select class="country" asp-for="CountryId" asp-items="Model.Countries">
+                    <option selected="selected" disabled="disabled">Страны</option>
                 </select>
-            </div>*@
+            </div>
+            <div class="select">
+                <select class="region" asp-for="RegionId" asp-items="Model.Regions">
+                    <option selected="selected" disabled="disabled">Регионы</option>
+                </select>
+            </div>
+            <div class="select">
+                <select class="city" asp-for="CityId" asp-items="Model.Cities">
+                    <option selected="selected" disabled="disabled">Города</option>
+                </select>
+            </div>
         </div>
         <div class="search-button">
             <input type="submit" value="Search" />
         </div>
     </form>
-</div>
+    @*<form asp-action="Index" enctype="multipart/form-data">
 
+    <input asp-for="ImageCaption" />
+    <input asp-for="ImageDescription" />
+    <input asp-for="MyImage" accept="image/*" />
+
+    <input type="submit" />
+</form>*@
+</div>
