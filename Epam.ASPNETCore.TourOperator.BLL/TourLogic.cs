@@ -25,5 +25,10 @@ namespace Epam.ASPNETCore.TourOperator.BLL
         {
             return tourDao.GetTours();
         }
+
+        public IEnumerable<Tour> GetToursByCountryId(int id)
+        {
+            return tourDao.GetToursByCountryId(id);
+        }
     }
 }

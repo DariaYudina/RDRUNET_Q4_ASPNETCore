@@ -52,6 +52,7 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
             var rand = new Random();
             var tours = tourLogic.GetTours().ToList();
             List<int> randomNumbers = new List<int>();
+            Dictionary<string, int> toursCount = new Dictionary<string, int>();
 
             var tourCount = 3;
             for (int i = 0; i < tourCount; i++)
@@ -68,6 +69,10 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
             model.Regions = new SelectList(regionLogic.GetRegions().ToList(), "Region_Id", "Title");
             model.Cities = new SelectList(cityLogic.GetCities().ToList(), "City_Id", "Title");
             model.Countries = new SelectList(countryLogic.GetCountries().ToList(), "Country_Id", "Title");
+            foreach (var item in model.Countries)
+            {
+                model.ToursCount.Add(item.Text, tourLogic.GetToursByCountryId(Convert.ToInt32(item.Value)).ToArray().Length);
+            }
             return View(model);
         }
 

@@ -10,5 +10,7 @@ namespace Epam.ASPNETCore.TourOperator.IDAL
         IEnumerable<Tour> GetTours();
 
         Tour GetTourById(int id);
+
+        IEnumerable<Tour> GetToursByCountryId(int id);
     }
 }

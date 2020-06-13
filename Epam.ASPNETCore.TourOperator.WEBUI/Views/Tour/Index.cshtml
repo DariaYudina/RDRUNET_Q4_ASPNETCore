@@ -19,7 +19,13 @@
         }
         <div class="mycard">
             <ul>
-                <li>Турция</li>
+                @foreach (var item in Model.ToursCount)
+                {
+                    if (item.Value != 0)
+                    {
+                        <li>@item.Key (@item.Value)</li>
+                    }
+                }
             </ul>
         </div>
     </div>
@@ -51,11 +57,11 @@
             </div>
         </div>
         <div class="search-button">
-            <input type="submit" value="Search" />
+            <input type="submit" value="Search" class="inputSearchButton" disabled />
         </div>
     </form>
 
-    @*Добавление туров*@
+    @*Добавление туров для теста*@
     @*<form asp-action="Index" enctype="multipart/form-data">
 
             <input asp-for="ImageCaption" />
@@ -84,12 +90,18 @@
                         $('.region').removeAttr('disabled');
                         $('.city').empty();
                         $('.city').append($('<option selected="selected" disabled="disabled">Города</option>'));
-                        $('.city').prop( "disabled", true );;
+                        $('.city').prop( "disabled", true );
                     },
                     error: function (req, status, error) {
                         alert(error);
                     }
                 });
+                if (!$(".country").val()) {
+                    $('.inputSearchButton').prop("disabled", true);
+                } else {
+                    $('.inputSearchButton').removeAttr('disabled');
+                }
+
             });
             $('.regionSelect').on('change', '.region', function () {
                 $.ajax({
