@@ -18,7 +18,7 @@ namespace Epam.ASPNETCore.TourOperator.DAL
         {
             this.connectionString = connectionString;
         }
-
+        ///assas
         public IEnumerable<Tour> GetTours()
         {
             var query = @"SELECT
