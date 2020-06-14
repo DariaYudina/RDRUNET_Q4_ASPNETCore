@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Epam.ASPNETCore.TourOperator.IDAL
 {
-    public interface ICityDao
+    public interface IAreaDao
     {
-        IEnumerable<City> GetCities();
-        City GetCityById(int id);
-        IEnumerable<City> GetCityiesByAreaId(int id);
+        IEnumerable<Area> GetAreas();
+        Area GetAreaById(int id);
+        IEnumerable<Area> GetAreasByRegionId(int id);
     }
 }

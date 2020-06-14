@@ -10,58 +10,56 @@ using System.Text;
 
 namespace Epam.ASPNETCore.TourOperator.DAL
 {
-    public class RegionDao : IRegionDao
+    public class AreaDao : IAreaDao
     {
         private readonly string connectionString;
 
-        public RegionDao(string connectionString)
+        public AreaDao(string connectionString)
         {
             this.connectionString = connectionString;
         }
 
-        public Region GetRegionById(int id)
+        public Area GetAreaById(int id)
         {
             var query = @"SELECT 
-                [Region_Id], 
-                [Country_Id],
-                [Title]
-                FROM Regions WHERE Region_Id = @id";
+                [Area_Id],
+                [Region_Id],
+                [Title] 
+                FROM Areas WHERE Area_Id = @id";
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                return connection.Query<Region>(query, new { id }).FirstOrDefault();
+                return connection.Query<Area>(query, new { id }).FirstOrDefault();
             }
         }
 
-        public IEnumerable<Region> GetRegions()
+        public IEnumerable<Area> GetAreas()
         {
-            var query = "SELECT " +
-                "[Region_Id]," +
-                "[Country_Id]," +
-                "[Title]"+
-                "FROM Regions";
+            var query = @"SELECT 
+                [Area_Id],
+                [Region_Id],
+                [Title]
+                FROM Areas";
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                return connection.Query<Region>(query);
+                return connection.Query<Area>(query);
             }
         }
 
-        public IEnumerable<Region> GetRegionsByCountryId(int id)
+        public IEnumerable<Area> GetAreasByRegionId(int id)
         {
             if(id != 0)
             {
                 var query = @"SELECT 
-                [Region_Id], 
-                [Country_Id],
-                [Title]
-                FROM Regions WHERE Country_Id = @id";
-
+                [Area_Id],
+                [Region_Id],
+                [Title] FROM Areas WHERE Region_Id = @id";
                 using (IDbConnection connection = new SqlConnection(connectionString))
                 {
-                    return connection.Query<Region>(query, new { id });
+                    return connection.Query<Area>(query, new { id });
                 }
             }
 
-            return GetRegions();
+            return GetAreas();
         }
     }
 }

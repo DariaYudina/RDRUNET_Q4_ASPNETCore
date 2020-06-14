@@ -27,30 +27,40 @@ namespace Epam.ASPNETCore.TourOperator.DAL
                 t.[StartDate],
                 t.[EndDate],
                 t.[Image],
+
                 c.[City_Id],
-                c.[Region_Id],
+                c.[Area_Id],
                 c.[Title],
-                r.Region_Id,
+
+                a.[Area_Id],
+                a.[Region_Id],
+                a.[Title],
+
+                r.[Region_Id],
                 r.[Country_Id],
                 r.[Title],
+
                 co.[Country_Id],
                 co.[Title]
+
                 FROM Tours as t
                 JOIN Cities AS c on t.City_Id = c.[City_Id]
-                JOIN Regions AS r on c.Region_Id = r.Region_Id
+                JOIN Areas AS a on c.Area_Id = a.Area_Id
+                JOIN Regions AS r on a.Region_Id = r.Region_Id
                 JOIN Countries AS co on r.Country_Id = co.Country_Id";
 
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                var result = connection.Query<Tour, City, Region, Country, Tour>(query,
-                    (t, c, r, co) =>
+                var result = connection.Query<Tour, City, Area, Region, Country, Tour>(query,
+                    (t, c, a, r, co) =>
                     {
                         t.City = c;
+                        t.Area = a;
                         t.Region = r;
                         t.Country = co;
                         return t;
                     },
-                    splitOn: "City_Id, Region_Id, Country_Id");
+                    splitOn: "City_Id, Area_Id, Region_Id, Country_Id");
 
                 return result;
             }
@@ -58,30 +68,51 @@ namespace Epam.ASPNETCore.TourOperator.DAL
 
         public Tour GetTourById(int id)
         {
-            //var query = @"SELECT
-            //    t.[Tour_Id], 
-            //    t.[Cost],
-            //    t.[StartDate],
-            //    t.[EndDate],
-            //    t.[Image],
-            //    c.[City_Id],
-            //    c.[Region_Id],
-            //    c.[Title],
-            //    r.Region_Id,
-            //    r.[Country_Id],
-            //    r.[Title],
-            //    co.[Country_Id],
-            //    co.[Title]
-            //    FROM Tours as t 
-            //    JOIN Cities AS c on t.City_Id = c.[City_Id]
-            //    JOIN Regions AS r on c.Region_Id = r.Region_Id
-            //    JOIN Countries AS co on r.Country_Id = co.Country_Id
-            //    WHERE Tour_Id = @id";
-            //using (IDbConnection connection = new SqlConnection(connectionString))
-            //{
-            //    return connection.Query<Tour>(query, new { id }).FirstOrDefault();
-            //}
-            return null;
+            var query = @"SELECT
+                t.[Tour_Id], 
+                t.[Cost],
+                t.[StartDate],
+                t.[EndDate],
+                t.[Image],
+
+                c.[City_Id],
+                c.[Area_Id],
+                c.[Title],
+
+                a.[Area_Id],
+                a.[Region_Id],
+                a.[Title],
+
+                r.[Region_Id],
+                r.[Country_Id],
+                r.[Title],
+
+                co.[Country_Id],
+                co.[Title]
+
+                FROM Tours as t
+                JOIN Cities AS c on t.City_Id = c.[City_Id]
+                JOIN Areas AS a on c.Area_Id = a.Area_Id
+                JOIN Regions AS r on a.Region_Id = r.Region_Id
+                JOIN Countries AS co on r.Country_Id = co.Country_Id
+                WHERE t.[Tour_Id] = @id";
+
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                var result = connection.Query<Tour, City, Area, Region, Country, Tour>(query,
+                    (t, c, a, r, co) =>
+                    {
+                        t.City = c;
+                        t.Area = a;
+                        t.Region = r;
+                        t.Country = co;
+                        return t;
+                    },
+                    new {id},
+                    splitOn: "City_Id, Area_Id, Region_Id, Country_Id").FirstOrDefault();
+
+                return result;
+            }
         }
 
         public IEnumerable<Tour> GetToursByCountryId(int id)
@@ -92,32 +123,42 @@ namespace Epam.ASPNETCore.TourOperator.DAL
                 t.[StartDate],
                 t.[EndDate],
                 t.[Image],
+
                 c.[City_Id],
-                c.[Region_Id],
+                c.[Area_Id],
                 c.[Title],
-                r.Region_Id,
+
+                a.[Area_Id],
+                a.[Region_Id],
+                a.[Title],
+
+                r.[Region_Id],
                 r.[Country_Id],
                 r.[Title],
+
                 co.[Country_Id],
                 co.[Title]
+
                 FROM Tours as t
                 JOIN Cities AS c on t.City_Id = c.[City_Id]
-                JOIN Regions AS r on c.Region_Id = r.Region_Id
+                JOIN Areas AS a on c.Area_Id = a.Area_Id
+                JOIN Regions AS r on a.Region_Id = r.Region_Id
                 JOIN Countries AS co on r.Country_Id = co.Country_Id
                 WHERE r.[Country_Id] = @id";
 
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                var result = connection.Query<Tour, City, Region, Country, Tour>(query,
-                    (t, c, r, co) =>
+                var result = connection.Query<Tour, City, Area, Region, Country, Tour>(query,
+                    (t, c, a, r, co) =>
                     {
                         t.City = c;
+                        t.Area = a;
                         t.Region = r;
                         t.Country = co;
                         return t;
                     },
                     new { id },
-                    splitOn: "City_Id, Region_Id, Country_Id");
+                    splitOn: "City_Id, Area_Id, Region_Id, Country_Id");
 
                 return result;
             }

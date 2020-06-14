@@ -18,15 +18,20 @@ namespace Epam.ASPNETCore.TourOperator.WEBUI.Models
         public Dictionary<string, int> ToursCount { get; set; } = new Dictionary<string, int>();
 
         public SelectList Countries { get; set; }
+
         public SelectList Regions { get; set; }
+
+        public SelectList Areas { get; set; }
+
         public SelectList Cities { get; set; }
 
         [Display(Name = "Дата отъезда")]
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get => StartDate.AddDays(DateCount); set => endDate = value; }
 
+        [Range(0, int.MaxValue)]
         [Display(Name = "Количество дней")]
-        public int DateCount { get; set; }
+        public int DateCount { get; set; } = 1;
 
         [Range(0, Double.MaxValue)]
         [Display(Name = "Цена от")]
@@ -35,9 +40,14 @@ namespace Epam.ASPNETCore.TourOperator.WEBUI.Models
         [Range(0, Double.MaxValue)]
         [Display(Name = "Цена до")]
         public decimal CostEnd { get; set; }
-        public int CountryId { get; set; }
-        public int RegionId { get; set; }
-        public int CityId { get; set; }
+
+        public int? Country_Id { get; set; } 
+
+        public int? Region_Id { get; set; }
+
+        public int? Area_Id { get; set; }
+
+        public int? City_Id { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

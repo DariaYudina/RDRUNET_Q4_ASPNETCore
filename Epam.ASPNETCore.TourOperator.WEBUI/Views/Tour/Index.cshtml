@@ -33,18 +33,23 @@
         <div class="validation" asp-validation-summary="ModelOnly" />
         <div class="selects">
             <div class="select countrySelect">
-                <select class="country" asp-for="CountryId" asp-items="Model.Countries">
-                    <option selected="selected" disabled="disabled">Страны</option>
+                <select class="country" asp-for="Country_Id" asp-items="Model.Countries">
+                    <option selected="selected">Страны</option>
                 </select>
             </div>
             <div class="select regionSelect">
-                <select class="region" asp-for="RegionId" asp-items="Model.Regions" disabled>
-                    <option selected="selected" disabled="disabled">Регионы</option>
+                <select class="region" asp-for="Region_Id" asp-items="Model.Regions">
+                    <option selected="selected">Регионы</option>
+                </select>
+            </div>
+            <div class="select areaSelect">
+                <select class="area" asp-for="Area_Id" asp-items="Model.Areas">
+                    <option selected="selected">Районы</option>
                 </select>
             </div>
             <div class="select">
-                <select class="city" asp-for="CityId" asp-items="Model.Cities" disabled>
-                    <option selected="selected" disabled="disabled">Города</option>
+                <select class="city" asp-for="City_Id" asp-items="Model.Cities">
+                    <option selected="selected">Города</option>
                 </select>
             </div>
         </div>
@@ -61,7 +66,7 @@
             </div>
             <div>
                 <label asp-for="StartDate"></label>
-                <input type="date" asp-for="StartDate" />
+                <input type="date" asp-for="StartDate"/>
             </div>
             <div>
                 <label asp-for="DateCount"></label>
@@ -70,7 +75,7 @@
 
         </div>
         <div class="search-button">
-            <input type="submit" value="Search" class="inputSearchButton" disabled />
+            <input type="submit" value="Search" class="inputSearchButton"/>
         </div>
     </form>
 
@@ -96,45 +101,72 @@
                     dataType: "json",
                     success: function (data) {
                         $('.region').empty();
-                        $('.region').append($('<option selected="selected" disabled="disabled">Регионы</option>'));
+                        $('.region').append($('<option selected="selected">Регионы</option>'));
                         $.each(data, function(key, entry) {
 	                        $('.region').append($('<option></option>').attr('value', entry.region_Id).text(entry.title));
                         });
-                        $('.region').removeAttr('disabled');
+                        //$('.region').removeAttr('disabled');
+                        $('.area').empty();
+                        $('.area').append($('<option selected="selected">Районы</option>'));
+                        //$('.area').prop( "disabled", true );
                         $('.city').empty();
-                        $('.city').append($('<option selected="selected" disabled="disabled">Города</option>'));
-                        $('.city').prop( "disabled", true );
+                        $('.city').append($('<option selected="selected">Города</option>'));
+                        //$('.city').prop( "disabled", true );
                     },
                     error: function (req, status, error) {
                         alert(error);
                     }
                 });
-                if (!$(".country").val()) {
-                    $('.inputSearchButton').prop("disabled", true);
-                } else {
-                    $('.inputSearchButton').removeAttr('disabled');
-                }
 
+                //if (!$(".country").val()) {
+                //    $('.inputSearchButton').prop("disabled", true);
+                //} else {
+                //    $('.inputSearchButton').removeAttr('disabled');
+                //}
             });
+
             $('.regionSelect').on('change', '.region', function () {
                 $.ajax({
                     type: "GET",
-                    url: "@Url.Action("GetCitiesByRegionId")",
+                    url: "@Url.Action("GetAreasByRegionId")",
                     data: {regionId: $( ".region" ).val()},
                     dataType: "json",
                     success: function (data) {
-                        $('.city').empty();
-                        $('.city').append($('<option selected="selected" disabled="disabled">Города</option>'));
+                        $('.area').empty();
+                        $('.area').append($('<option selected="selected">Районы</option>'));
                         $.each(data, function(key, entry) {
-	                        $('.city').append($('<option></option>').attr('value', entry.city_Id).text(entry.title));
+	                        $('.area').append($('<option></option>').attr('value', entry.area_Id).text(entry.title));
                         });
-                        $('.city').removeAttr('disabled');
+                        //$('.area').removeAttr('disabled');
+                        $('.city').empty();
+                        $('.city').append($('<option selected="selected">Города</option>'));
+                        //$('.city').prop( "disabled", true );
                     },
                     error: function (req, status, error) {
                         alert(error);
                     }
                 });
             });
+
+            $('.areaSelect').on('change', '.area', function () {
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("GetCitiesByAreaId")",
+                data: {areaId: $( ".area" ).val()},
+                dataType: "json",
+                success: function (data) {
+                    $('.city').empty();
+                    $('.city').append($('<option selected="selected">Города</option>'));
+                    $.each(data, function(key, entry) {
+	                    $('.city').append($('<option></option>').attr('value', entry.city_Id).text(entry.title));
+                    });
+                    //$('.city').removeAttr('disabled');
+                },
+                error: function (req, status, error) {
+                    alert(error);
+                }
+            });
         });
+    });
     </script>
 }

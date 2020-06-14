@@ -20,6 +20,8 @@ namespace Epam.ASPNETCore.TourOperator.Entities
 
         public City City { get; set; }
 
+        public Area Area { get; set; }
+
         public Region Region { get; set; }
 
         public Country Country { get; set; }

@@ -37,6 +37,8 @@ namespace Epam.ASPNETCore.TourOperator.WEBUI
             services.AddSingleton<IRegionDao, RegionDao>(provider => new RegionDao(Configuration.GetConnectionString("TourDB")));
             services.AddSingleton<ICityLogic, CityLogic>();
             services.AddSingleton<ICityDao, CityDao>(provider => new CityDao(Configuration.GetConnectionString("TourDB")));
+            services.AddSingleton<IAreaLogic, AreaLogic>();
+            services.AddSingleton<IAreaDao, AreaDao>(provider => new AreaDao(Configuration.GetConnectionString("TourDB")));
             services.AddAutoMapper(typeof(Startup));
         }
 

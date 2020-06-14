@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Epam.ASPNETCore.TourOperator.IBLL
 {
-    public interface ICityLogic
+    public interface IAreaLogic
     {
-        IEnumerable<City> GetCities();
-        City GetCityById(int id);
-        IEnumerable<City> GetCitiesByAreaId(int id);
+        IEnumerable<Area> GetAreas();
+        Area GetAreaById(int id);
+        IEnumerable<Area> GetAreasByRegionId(int id);
     }
 }

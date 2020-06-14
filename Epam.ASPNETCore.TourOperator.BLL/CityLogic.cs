@@ -25,9 +25,9 @@ namespace Epam.ASPNETCore.TourOperator.BLL
             return cityDao.GetCityById(id);
         }
 
-        public IEnumerable<City> GetCitiesByRegionId(int id)
+        public IEnumerable<City> GetCitiesByAreaId(int id)
         {
-            return cityDao.GetCityiesByRegionId(id);
+            return cityDao.GetCityiesByAreaId(id);
         }
     }
 }

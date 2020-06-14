@@ -23,7 +23,7 @@ namespace Epam.ASPNETCore.TourOperator.DAL
         {
            var query = @"SELECT 
                 [City_Id],
-                [Region_Id],
+                [Area_Id],
                 [Title]
                 FROM Cities";
             using (IDbConnection connection = new SqlConnection(connectionString))
@@ -45,16 +45,21 @@ namespace Epam.ASPNETCore.TourOperator.DAL
             }
         }
 
-        public IEnumerable<City> GetCityiesByRegionId(int id)
+        public IEnumerable<City> GetCityiesByAreaId(int id)
         {
-            var query = @"SELECT 
-                [City_Id],
-                [Region_Id],
-                [Title] FROM Cities WHERE Region_Id = @id";
-            using (IDbConnection connection = new SqlConnection(connectionString))
+             if(id != 0)
             {
-                return connection.Query<City>(query, new { id });
+                var query = @"SELECT 
+                [City_Id],
+                [Area_Id],
+                [Title] FROM Cities WHERE Area_Id = @id";
+                using (IDbConnection connection = new SqlConnection(connectionString))
+                {
+                    return connection.Query<City>(query, new { id });
+                }
             }
+
+            return GetCities();
         }
     }
 }

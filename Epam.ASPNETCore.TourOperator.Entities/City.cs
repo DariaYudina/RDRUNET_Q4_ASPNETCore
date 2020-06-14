@@ -6,6 +6,6 @@
 
         public string Title { get; set; }
 
-        public int Region_Id { get; set; }
+        public int Area_Id { get; set; }
     }
 }

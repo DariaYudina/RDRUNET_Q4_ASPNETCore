@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Epam.ASPNETCore.TourOperator.Entities
 {
-    class Area
+    public class Area
     {
         public int Area_Id { get; set; }
 

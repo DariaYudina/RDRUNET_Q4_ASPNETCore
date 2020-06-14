@@ -25,6 +25,8 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
 
         private readonly IRegionLogic regionLogic;
 
+        private readonly IAreaLogic areaLogic;
+
         private readonly ICityLogic cityLogic;
 
         private readonly IMapper mapper;
@@ -34,6 +36,7 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
             ITourLogic tourLogic, 
             ICountryLogic countryLogic,
             IRegionLogic regionLogic,
+            IAreaLogic areaLogic,
             ICityLogic cityLogic,
             IMapper mapper)
         {
@@ -41,6 +44,7 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
             this.tourLogic = tourLogic;
             this.countryLogic = countryLogic;
             this.regionLogic = regionLogic;
+            this.areaLogic = areaLogic;
             this.cityLogic = cityLogic;
             this.mapper = mapper;
         }
@@ -66,6 +70,8 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
                 randomNumbers.Add(number);
                 model.RandomTours.Add(mapper.Map<TourViewModel>(tours[number]));
             }
+
+            model.Areas = new SelectList(areaLogic.GetAreas().ToList(), "Area_Id", "Title");
             model.Regions = new SelectList(regionLogic.GetRegions().ToList(), "Region_Id", "Title");
             model.Cities = new SelectList(cityLogic.GetCities().ToList(), "City_Id", "Title");
             model.Countries = new SelectList(countryLogic.GetCountries().ToList(), "Country_Id", "Title");
@@ -73,6 +79,7 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
             {
                 model.ToursCount.Add(item.Text, tourLogic.GetToursByCountryId(Convert.ToInt32(item.Value)).ToArray().Length);
             }
+
             return View(model);
         }
 
@@ -98,12 +105,21 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
                     randomNumbers.Add(number);
                     model.RandomTours.Add(mapper.Map<TourViewModel>(tours[number]));
                 }
+
+                model.Areas = new SelectList(areaLogic.GetAreas().ToList(), "Area_Id", "Title");
                 model.Regions = new SelectList(regionLogic.GetRegions().ToList(), "Region_Id", "Title");
                 model.Cities = new SelectList(cityLogic.GetCities().ToList(), "City_Id", "Title");
                 model.Countries = new SelectList(countryLogic.GetCountries().ToList(), "Country_Id", "Title");
+                
                 foreach (var item in model.Countries)
                 {
                     model.ToursCount.Add(item.Text, tourLogic.GetToursByCountryId(Convert.ToInt32(item.Value)).ToArray().Length);
+                }
+
+                if(model.Area_Id == null || model.City_Id == null || model.Region_Id == null || model.Country_Id == null)
+                {
+                    return View("SearchResult", new TourViewModel());
+
                 }
 
                 return View(model);
@@ -112,33 +128,19 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
             return View("SearchResult", new TourViewModel());
         }
 
-        //[HttpPost]
-        //public IActionResult Index(CreatePost model)
-        //{
-        //    var img = model.MyImage;
-        //    var imgCaption = model.ImageCaption;
-        //    var fileName = Path.GetFileName(model.MyImage.FileName);
-        //    var contentType = model.MyImage.ContentType;
-        //    string imgBase64;
-        //    byte[] bytearr;
-
-        //    if (model.MyImage != null)
-        //    {
-        //        bytearr = GetByteArrayFromImage(model.MyImage);
-        //        imgBase64 = Convert.ToBase64String(bytearr);
-        //    }
-
-        //    return RedirectToAction("Index", "Home");
-        //}
-
-        public ActionResult GetRegionsByCountryId(int countryId)
+        public ActionResult GetRegionsByCountryId(int countryId = 0)
         {
             return Json(regionLogic.GetRegionsByCountryId(countryId));
         }
 
-        public ActionResult GetCitiesByRegionId(int regionId)
+        public ActionResult GetAreasByRegionId(int regionId = 0)
         {
-            return Json(cityLogic.GetCitiesByRegionId(regionId));
+            return Json(areaLogic.GetAreasByRegionId(regionId));
+        }
+
+        public ActionResult GetCitiesByAreaId(int areaId = 0)
+        {
+            return Json(cityLogic.GetCitiesByAreaId(areaId));
         }
 
         public IActionResult Privacy()
@@ -167,5 +169,24 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
                 return target.ToArray();
             }
         }
+
+        //[HttpPost]
+        //public IActionResult Index(CreatePost model)
+        //{
+        //    var img = model.MyImage;
+        //    var imgCaption = model.ImageCaption;
+        //    var fileName = Path.GetFileName(model.MyImage.FileName);
+        //    var contentType = model.MyImage.ContentType;
+        //    string imgBase64;
+        //    byte[] bytearr;
+
+        //    if (model.MyImage != null)
+        //    {
+        //        bytearr = GetByteArrayFromImage(model.MyImage);
+        //        imgBase64 = Convert.ToBase64String(bytearr);
+        //    }
+
+        //    return RedirectToAction("Index", "Home");
+        //}
     }
 }
