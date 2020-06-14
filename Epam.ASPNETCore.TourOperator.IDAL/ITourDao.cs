@@ -12,5 +12,8 @@ namespace Epam.ASPNETCore.TourOperator.IDAL
         Tour GetTourById(int id);
 
         IEnumerable<Tour> GetToursByCountryId(int id);
+
+        IEnumerable<Tour> GetToursBySearchParametrs(int? countryId, int? regionId, int? areaId, int? cityId, decimal? startCost,
+            decimal? endCost, DateTime startDate, int dateCount);
     }
 }

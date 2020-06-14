@@ -9,6 +9,6 @@ namespace Epam.ASPNETCore.TourOperator.IBLL
     {
         IEnumerable<Area> GetAreas();
         Area GetAreaById(int id);
-        IEnumerable<Area> GetAreasByRegionId(int id);
+        IEnumerable<Area> GetAreasByRegionId(int? id);
     }
 }

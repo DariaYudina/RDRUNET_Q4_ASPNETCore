@@ -1,13 +1,16 @@
-﻿@model TourViewModel
+﻿@model IEnumerable<TourViewModel>
 @{
     ViewData["Title"] = "Результаты поиска";
 }
 
-<h1>Результаты поиска</h1>
+<h5 class="display-6">Результаты поиска</h5>
 <div class="cards">
-    <div class="mycard ">
-        <a href="#">
-            <img src="@Model.Image" asp-append-version="true" />
-        </a>
-    </div>
+    @foreach (var item in Model)
+    {
+        <div class="mycard ">
+            <a href="#">
+                <img src="@item.Image" asp-append-version="true" />
+            </a>
+        </div>
+    }
 </div>

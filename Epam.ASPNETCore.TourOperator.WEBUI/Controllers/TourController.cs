@@ -118,13 +118,17 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
 
                 if(model.Area_Id == null || model.City_Id == null || model.Region_Id == null || model.Country_Id == null)
                 {
-                    return View("SearchResult", new TourViewModel());
-
+                    var res1 = tourLogic.GetToursBySearchParametrs(model.Country_Id, model.Region_Id, model.Area_Id, model.City_Id,
+                    model.CostStart, model.CostEnd, model.StartDate, model.DateCount);
+                    var toursres = mapper.Map<List<TourViewModel>>(res1);
+                    return View("SearchResult", toursres);
                 }
 
                 return View(model);
             }
 
+            var res = tourLogic.GetToursBySearchParametrs(model.Country_Id, model.Region_Id, model.Area_Id, model.City_Id,
+                      model.CostStart, model.CostEnd, model.StartDate, model.DateCount);
             return View("SearchResult", new TourViewModel());
         }
 
@@ -133,7 +137,7 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
             return Json(regionLogic.GetRegionsByCountryId(countryId));
         }
 
-        public ActionResult GetAreasByRegionId(int regionId = 0)
+        public ActionResult GetAreasByRegionId(int? regionId)
         {
             return Json(areaLogic.GetAreasByRegionId(regionId));
         }
@@ -152,13 +156,6 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Search(CreatePost model)
-        {
-            return View();
         }
 
         private byte[] GetByteArrayFromImage(IFormFile file)

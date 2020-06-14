@@ -45,14 +45,15 @@ namespace Epam.ASPNETCore.TourOperator.DAL
             }
         }
 
-        public IEnumerable<Area> GetAreasByRegionId(int id)
+        public IEnumerable<Area> GetAreasByRegionId(int? id)
         {
             if(id != 0)
             {
                 var query = @"SELECT 
                 [Area_Id],
                 [Region_Id],
-                [Title] FROM Areas WHERE Region_Id = @id";
+                [Title] FROM Areas WHERE Region_Id = ISNULL(@id, Region_Id)";
+
                 using (IDbConnection connection = new SqlConnection(connectionString))
                 {
                     return connection.Query<Area>(query, new { id });
