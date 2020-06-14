@@ -71,7 +71,6 @@ body {
 }
 
 /*------------MySyles----------------------*/
-
 .cards{
     display: flex;
     justify-content: center;
@@ -90,14 +89,21 @@ body {
 .search-form{
     display: flex;
     flex-direction: column;
-    width: 80%;
 }
 .selects {
     display: flex;
 }
-.select{
+.selects div{
+    flex: 0 0 150px;
     margin: 10px;
 }
-.search-button {
-    align-self: flex-end;
+.selects input{
+    width: 150px;
 }
+.selects select{
+    width: 150px;
+}
+.search-button {
+    margin: 10px;
+}
+

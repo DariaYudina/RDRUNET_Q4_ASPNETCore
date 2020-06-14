@@ -77,25 +77,59 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(CreatePost model)
+        public IActionResult Index(SearchViewModel model)
         {
-            var img = model.MyImage;
-            var imgCaption = model.ImageCaption;
-            var fileName = Path.GetFileName(model.MyImage.FileName);
-            var contentType = model.MyImage.ContentType;
-            string imgBase64;
-            byte[] bytearr;
-
-            if (model.MyImage != null)
+            if (!ModelState.IsValid)
             {
-                bytearr = GetByteArrayFromImage(model.MyImage);
-                imgBase64 = Convert.ToBase64String(bytearr);
+                var rand = new Random();
+                var tours = tourLogic.GetTours().ToList();
+                List<int> randomNumbers = new List<int>();
+                Dictionary<string, int> toursCount = new Dictionary<string, int>();
+
+                var tourCount = 3;
+                for (int i = 0; i < tourCount; i++)
+                {
+                    int number;
+                    do
+                    {
+                        number = rand.Next(0, tours.Count());
+                    }
+                    while (randomNumbers.Contains(number));
+                    randomNumbers.Add(number);
+                    model.RandomTours.Add(mapper.Map<TourViewModel>(tours[number]));
+                }
+                model.Regions = new SelectList(regionLogic.GetRegions().ToList(), "Region_Id", "Title");
+                model.Cities = new SelectList(cityLogic.GetCities().ToList(), "City_Id", "Title");
+                model.Countries = new SelectList(countryLogic.GetCountries().ToList(), "Country_Id", "Title");
+                foreach (var item in model.Countries)
+                {
+                    model.ToursCount.Add(item.Text, tourLogic.GetToursByCountryId(Convert.ToInt32(item.Value)).ToArray().Length);
+                }
+
+                return View(model);
             }
 
-            //ViewBag.Companies = new SelectList(companies, "Id", "Name");
-
-            return RedirectToAction("Index", "Home");
+            return View("SearchResult", new TourViewModel());
         }
+
+        //[HttpPost]
+        //public IActionResult Index(CreatePost model)
+        //{
+        //    var img = model.MyImage;
+        //    var imgCaption = model.ImageCaption;
+        //    var fileName = Path.GetFileName(model.MyImage.FileName);
+        //    var contentType = model.MyImage.ContentType;
+        //    string imgBase64;
+        //    byte[] bytearr;
+
+        //    if (model.MyImage != null)
+        //    {
+        //        bytearr = GetByteArrayFromImage(model.MyImage);
+        //        imgBase64 = Convert.ToBase64String(bytearr);
+        //    }
+
+        //    return RedirectToAction("Index", "Home");
+        //}
 
         public ActionResult GetRegionsByCountryId(int countryId)
         {
