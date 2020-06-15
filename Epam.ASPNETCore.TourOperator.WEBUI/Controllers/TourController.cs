@@ -119,9 +119,9 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
                 if(model.Area_Id == null || model.City_Id == null || model.Region_Id == null || model.Country_Id == null)
                 {
                     var res1 = tourLogic.GetToursBySearchParametrs(model.Country_Id, model.Region_Id, model.Area_Id, model.City_Id,
-                    model.CostStart, model.CostEnd, model.StartDate, model.DateCount);
-                    var toursres = mapper.Map<List<TourViewModel>>(res1);
-                    return View("SearchResult", toursres);
+                    model.CostStart, model.CostEnd, model.StartDate, model.DateCount).ToList();
+                    var toursres1 = mapper.Map<List<TourViewModel>>(res1);
+                    return View("SearchResult", toursres1);
                 }
 
                 return View(model);
@@ -129,7 +129,9 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
 
             var res = tourLogic.GetToursBySearchParametrs(model.Country_Id, model.Region_Id, model.Area_Id, model.City_Id,
                       model.CostStart, model.CostEnd, model.StartDate, model.DateCount);
-            return View("SearchResult", new TourViewModel());
+            var toursres = mapper.Map<List<TourViewModel>>(res);
+
+            return View("SearchResult", toursres);
         }
 
         public ActionResult GetRegionsByCountryId(int countryId = 0)
