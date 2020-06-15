@@ -53,24 +53,19 @@
         </div>
         <div class="selects">
             <div>
-                <label asp-for="CostStart"></label>
-                <input asp-for="CostStart" type="number" min="0" />
+                <input asp-for="CostStart" type="number" min="0"  placeholder="Цена от"/>
                 <span asp-validation-for="CostStart" />
             </div>
             <div>
-                <label asp-for="CostEnd"></label>
-                <input asp-for="CostEnd" type="number" min="0" />
+                <input asp-for="CostEnd" type="number" min="0"  placeholder="Цена до"/>
                 <span asp-validation-for="CostEnd" />
             </div>
             <div>
-                <label asp-for="StartDate"></label>
-                <input type="date" asp-for="StartDate"/>
+                <input type="date" asp-for="StartDate" placeholder="Дата отъезда" type="text" onfocus="(this.type='date')"/>
             </div>
             <div>
-                <label asp-for="DateCount"></label>
-                <input asp-for="DateCount" type="number" min="1" />
+                <input asp-for="DateCount" type="number" min="0" placeholder="Количество дней"/>
             </div>
-
         </div>
         <div class="search-button">
             <input type="submit" value="Search" class="inputSearchButton"/>

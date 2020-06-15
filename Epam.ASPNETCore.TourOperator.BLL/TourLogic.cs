@@ -31,7 +31,7 @@ namespace Epam.ASPNETCore.TourOperator.BLL
             return tourDao.GetToursByCountryId(id);
         }
 
-        public IEnumerable<Tour> GetToursBySearchParametrs(int? countryId, int? regionId, int? areaId, int? cityId, decimal? startCost, decimal? endCost, DateTime startDate, int dateCount)
+        public IEnumerable<Tour> GetToursBySearchParametrs(int? countryId, int? regionId, int? areaId, int? cityId, decimal? startCost, decimal? endCost, DateTime? startDate, int? dateCount)
         {
             return tourDao.GetToursBySearchParametrs(countryId, regionId, areaId, cityId, startCost, endCost, startDate, dateCount); 
         }

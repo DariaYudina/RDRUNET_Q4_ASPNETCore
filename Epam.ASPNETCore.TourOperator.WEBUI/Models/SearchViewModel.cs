@@ -10,7 +10,11 @@ namespace Epam.ASPNETCore.TourOperator.WEBUI.Models
 {
     public class SearchViewModel : IValidatableObject
     {
-        private DateTime endDate;
+        private DateTime? endDate;
+        private int? dateCount;
+        private decimal? costStart;
+        private decimal? costEnd;
+        private DateTime? startDate;
 
         public List<string> RandomTourImages { get; set; } = new List<string>();
         public List<TourViewModel> RandomTours { get; set; } = new List<TourViewModel>();
@@ -26,22 +30,22 @@ namespace Epam.ASPNETCore.TourOperator.WEBUI.Models
         public SelectList Cities { get; set; }
 
         [Display(Name = "Дата отъезда")]
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get => StartDate.AddDays(DateCount); set => endDate = value; }
+        public DateTime? StartDate { get => startDate == DateTime.MinValue ? null : startDate; set => startDate = value; }
+        public DateTime? EndDate { get => StartDate == null ? null : (DateTime?)(StartDate.Value.AddDays(DateCount ?? 0)); set => endDate = value; }
 
         [Range(0, int.MaxValue)]
         [Display(Name = "Количество дней")]
-        public int DateCount { get; set; } = 1;
+        public int? DateCount { get => dateCount == 0 ? null : dateCount; set => dateCount = value; }
 
         [Range(0, Double.MaxValue)]
         [Display(Name = "Цена от")]
-        public decimal CostStart { get; set; }
+        public decimal? CostStart { get => costStart == 0 ? null : costStart; set => costStart = value; }
 
         [Range(0, Double.MaxValue)]
         [Display(Name = "Цена до")]
-        public decimal CostEnd { get; set; }
+        public decimal? CostEnd { get => costEnd == 0 ? null : costEnd; set => costEnd = value; }
 
-        public int? Country_Id { get; set; } 
+        public int? Country_Id { get; set; }
 
         public int? Region_Id { get; set; }
 

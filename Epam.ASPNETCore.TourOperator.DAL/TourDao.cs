@@ -165,7 +165,7 @@ namespace Epam.ASPNETCore.TourOperator.DAL
         }
 
         public IEnumerable<Tour> GetToursBySearchParametrs(int? countryId, int? regionId, int? areaId, int? cityId,
-            decimal? startCost, decimal? endCost, DateTime startDate, int dateCount)
+            decimal? startCost, decimal? endCost, DateTime? startDate, int? dateCount)
         {
             var query = @"SELECT
                 t.[Tour_Id], 
@@ -198,7 +198,12 @@ namespace Epam.ASPNETCore.TourOperator.DAL
                 WHERE co.[Country_Id] = ISNULL(@countryId, co.[Country_Id])
                 AND r.[Region_Id] =  ISNULL(@regionId, r.[Region_Id])
                 AND a.[Area_Id] = ISNULL(@areaId, a.[Area_Id])
-                AND c.[City_Id] = ISNULL(@cityId, c.[City_Id])";
+                AND c.[City_Id] = ISNULL(@cityId, c.[City_Id])
+                AND t.[Cost] >= ISNULL(@startCost, t.[Cost])
+                AND t.[Cost] <= ISNULL(@endCost, t.[Cost])
+                AND t.[StartDate] = ISNULL(@startDate, t.[StartDate])
+                AND t.[DateCount] = ISNULL(@dateCount, t.[DateCount])
+                ";
 
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
@@ -217,6 +222,10 @@ namespace Epam.ASPNETCore.TourOperator.DAL
                         areaId,
                         regionId,
                         countryId,
+                        startCost,
+                        endCost,
+                        startDate,
+                        dateCount
                     },
                     splitOn: "City_Id, Area_Id, Region_Id, Country_Id");
 

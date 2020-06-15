@@ -56,7 +56,6 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
             var rand = new Random();
             var tours = tourLogic.GetTours().ToList();
             List<int> randomNumbers = new List<int>();
-            Dictionary<string, int> toursCount = new Dictionary<string, int>();
 
             var tourCount = 3;
             for (int i = 0; i < tourCount; i++)
@@ -91,8 +90,7 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
                 var rand = new Random();
                 var tours = tourLogic.GetTours().ToList();
                 List<int> randomNumbers = new List<int>();
-                Dictionary<string, int> toursCount = new Dictionary<string, int>();
-
+               
                 var tourCount = 3;
                 for (int i = 0; i < tourCount; i++)
                 {
@@ -118,20 +116,17 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
 
                 if(model.Area_Id == null || model.City_Id == null || model.Region_Id == null || model.Country_Id == null)
                 {
-                    var res1 = tourLogic.GetToursBySearchParametrs(model.Country_Id, model.Region_Id, model.Area_Id, model.City_Id,
-                    model.CostStart, model.CostEnd, model.StartDate, model.DateCount).ToList();
-                    var toursres1 = mapper.Map<List<TourViewModel>>(res1);
-                    return View("SearchResult", toursres1);
+                    return View("SearchResult", mapper.Map<List<TourViewModel>>(
+                            tourLogic.GetToursBySearchParametrs(model.Country_Id, model.Region_Id, model.Area_Id, 
+                            model.City_Id,model.CostStart, model.CostEnd, model.StartDate, model.DateCount).ToList()));
                 }
 
                 return View(model);
             }
 
-            var res = tourLogic.GetToursBySearchParametrs(model.Country_Id, model.Region_Id, model.Area_Id, model.City_Id,
-                      model.CostStart, model.CostEnd, model.StartDate, model.DateCount);
-            var toursres = mapper.Map<List<TourViewModel>>(res);
-
-            return View("SearchResult", toursres);
+            return View("SearchResult", mapper.Map<List<TourViewModel>>(
+                    tourLogic.GetToursBySearchParametrs(model.Country_Id, model.Region_Id, model.Area_Id,
+                    model.City_Id, model.CostStart, model.CostEnd, model.StartDate, model.DateCount).ToList()));
         }
 
         public ActionResult GetRegionsByCountryId(int countryId = 0)
