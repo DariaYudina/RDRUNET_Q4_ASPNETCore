@@ -71,6 +71,8 @@ body {
 }
 
 /*------------MySyles----------------------*/
+/*------------Index----------------------*/
+
 .cards{
     display: flex;
     justify-content: center;
@@ -107,3 +109,25 @@ body {
     margin: 10px;
 }
 
+/*------------SearchResult----------------------*/
+
+.searchCards {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+.searchCard {
+    display: flex;
+    flex: 0 0 200px;
+    margin: 20px;
+}
+
+.searchCard img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+.searchCard a{
+    margin-right: 20px;
+}
