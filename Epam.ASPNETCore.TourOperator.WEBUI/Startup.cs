@@ -40,6 +40,12 @@ namespace Epam.ASPNETCore.TourOperator.WEBUI
             services.AddSingleton<IAreaLogic, AreaLogic>();
             services.AddSingleton<IAreaDao, AreaDao>(provider => new AreaDao(Configuration.GetConnectionString("TourDB")));
             services.AddAutoMapper(typeof(Startup));
+            services.AddDistributedRedisCache(options =>
+            {
+                options.Configuration = "localhost:6379";
+                options.InstanceName = "RedisInstance";
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,5 +75,7 @@ namespace Epam.ASPNETCore.TourOperator.WEBUI
                     pattern: "{controller=Tour}/{action=Index}/{id?}");
             });
         }
+
+
     }
 }

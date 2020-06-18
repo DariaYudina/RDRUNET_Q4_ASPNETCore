@@ -12,6 +12,9 @@ using System.IO;
 using Epam.ASPNETCore.TourOperator.WEBUI.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using AutoMapper;
+using Microsoft.Extensions.Caching.Distributed;
+using Newtonsoft.Json;
+using Epam.ASPNETCore.TourOperator.Entities;
 
 namespace Epam.ASPNETCore.TourOperator.Controllers
 {
@@ -31,6 +34,7 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
 
         private readonly IMapper mapper;
 
+        private readonly IDistributedCache distributedCache;
 
         public TourController(ILogger<TourController> logger, 
             ITourLogic tourLogic, 
@@ -38,7 +42,8 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
             IRegionLogic regionLogic,
             IAreaLogic areaLogic,
             ICityLogic cityLogic,
-            IMapper mapper)
+            IMapper mapper,
+            IDistributedCache distributedCache)
         {
             _logger = logger;
             this.tourLogic = tourLogic;
@@ -47,14 +52,32 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
             this.areaLogic = areaLogic;
             this.cityLogic = cityLogic;
             this.mapper = mapper;
+            this.distributedCache = distributedCache;
         }
 
         public IActionResult Index()
         {
-            var model = new SearchViewModel();
+            List<int> toursId = new List<int>();
+            var tours = new List<Tour>();
+            if (string.IsNullOrEmpty(distributedCache.GetString("tours")))
+            {
+                var cachetours = tourLogic.GetTours().ToList();
+                toursId = cachetours.Select(p => p.Tour_Id).ToList();
+                var tourString = JsonConvert.SerializeObject(toursId);
+                distributedCache.SetString("tours", tourString);
+            }
+            else
+            {
+                toursId = JsonConvert.DeserializeObject<List<int>>(distributedCache.GetString("tours"));
+                foreach (var item in toursId)
+                {
+                    tours.Add(tourLogic.GetTourById(item));
+                }
+            }
 
+            var model = new SearchViewModel();
             var rand = new Random();
-            var tours = tourLogic.GetTours().ToList();
+            //var tours = tourLogic.GetTours().ToList();
             List<int> randomNumbers = new List<int>();
 
             var tourCount = 3;

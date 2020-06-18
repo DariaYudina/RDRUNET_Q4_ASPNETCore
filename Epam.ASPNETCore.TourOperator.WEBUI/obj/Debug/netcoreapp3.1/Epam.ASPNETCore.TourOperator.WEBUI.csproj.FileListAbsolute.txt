@@ -201,5 +201,7 @@ C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.
 C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\bin\Debug\netcoreapp3.1\AutoMapper.dll
 C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
-C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\obj\Debug\netcoreapp3.1\Epam.ASPNETCore.TourOperator.WEBUI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\obj\Debug\netcoreapp3.1\Razor\Views\Tour\SearchResult.cshtml.g.cs
+C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Redis.dll
+C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\bin\Debug\netcoreapp3.1\StackExchange.Redis.StrongName.dll
+C:\Users\Daria_Iudina\source\rdrunet_q4_aspnetcore\Epam.ASPNETCore.TourOperator.WEBUI\obj\Debug\netcoreapp3.1\Epam.ASPNETCore.TourOperator.WEBUI.MvcApplicationPartsAssemblyInfo.cache
