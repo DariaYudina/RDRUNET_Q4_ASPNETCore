@@ -18,9 +18,9 @@
             <ul>
                 @foreach (var item in Model.ToursCount)
                 {
-                    if (item.Value != 0)
+                    if (item.TourCount != 0)
                     {
-                        <li>@item.Key (@item.Value)</li>
+                        <li>@item.CountryTitle (@item.TourCount)</li>
                     }
                 }
             </ul>

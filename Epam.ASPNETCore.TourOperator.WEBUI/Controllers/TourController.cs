@@ -15,6 +15,7 @@ using AutoMapper;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
 using Epam.ASPNETCore.TourOperator.Entities;
+using System.Text;
 
 namespace Epam.ASPNETCore.TourOperator.Controllers
 {
@@ -57,49 +58,67 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
 
         public IActionResult Index()
         {
+            var model = new SearchViewModel();
+            var tours = tourLogic.GetTours().ToList();
+
             List<int> toursId = new List<int>();
-            var tours = new List<Tour>();
-            if (string.IsNullOrEmpty(distributedCache.GetString("tours")))
-            {
-                var cachetours = tourLogic.GetTours().ToList();
-                toursId = cachetours.Select(p => p.Tour_Id).ToList();
-                var tourString = JsonConvert.SerializeObject(toursId);
-                distributedCache.SetString("tours", tourString);
-            }
+            if (string.IsNullOrEmpty(distributedCache.GetString("randomTours"))){
+                List<int> randomNumbers = new List<int>();
+                var rand = new Random();
+                var tourCount = 3;
+                for (int i = 0; i < tourCount; i++)
+                {
+                    int number;
+                    do
+                    {
+                        number = rand.Next(0, tours.Count());
+                    }
+                    while (randomNumbers.Contains(number));
+                    randomNumbers.Add(number);
+                    model.RandomTours.Add(mapper.Map<TourViewModel>(tours[number]));
+
+                    toursId = model.RandomTours.Select(p => p.Tour_Id).ToList();
+                    var tourString = JsonConvert.SerializeObject(toursId);
+
+                    var currentTimeUTC = DateTime.UtcNow.ToString();
+                    byte[] encodedCurrentTimeUTC = Encoding.UTF8.GetBytes(currentTimeUTC);
+                    var options = new DistributedCacheEntryOptions()
+                        .SetSlidingExpiration(TimeSpan.FromSeconds(20));
+
+                    distributedCache.SetString("randomTours", tourString, options);
+                }
+            }  
             else
             {
-                toursId = JsonConvert.DeserializeObject<List<int>>(distributedCache.GetString("tours"));
+                toursId = JsonConvert.DeserializeObject<List<int>>(distributedCache.GetString("randomTours"));
                 foreach (var item in toursId)
                 {
-                    tours.Add(tourLogic.GetTourById(item));
+                    model.RandomTours.Add(mapper.Map<TourViewModel>(tourLogic.GetTourById(item)));
                 }
-            }
-
-            var model = new SearchViewModel();
-            var rand = new Random();
-            //var tours = tourLogic.GetTours().ToList();
-            List<int> randomNumbers = new List<int>();
-
-            var tourCount = 3;
-            for (int i = 0; i < tourCount; i++)
-            {
-                int number;
-                do
-                {
-                    number = rand.Next(0, tours.Count());
-                }
-                while (randomNumbers.Contains(number));
-                randomNumbers.Add(number);
-                model.RandomTours.Add(mapper.Map<TourViewModel>(tours[number]));
             }
 
             model.Areas = new SelectList(areaLogic.GetAreas().ToList(), "Area_Id", "Title");
             model.Regions = new SelectList(regionLogic.GetRegions().ToList(), "Region_Id", "Title");
             model.Cities = new SelectList(cityLogic.GetCities().ToList(), "City_Id", "Title");
             model.Countries = new SelectList(countryLogic.GetCountries().ToList(), "Country_Id", "Title");
-            foreach (var item in model.Countries)
+
+            if (string.IsNullOrEmpty(distributedCache.GetString("toursCount")))
             {
-                model.ToursCount.Add(item.Text, tourLogic.GetToursByCountryId(Convert.ToInt32(item.Value)).ToArray().Length);
+                foreach (var item in model.Countries)
+                {
+                    model.ToursCount.Add( new CountryViewModel() { CountryTitle = item.Text,
+                        TourCount = tourLogic.GetToursByCountryId(Convert.ToInt32(item.Value)).ToArray().Length });
+                }
+                var tourString = JsonConvert.SerializeObject(model.ToursCount);
+                var currentTimeUTC = DateTime.UtcNow.ToString();
+                byte[] encodedCurrentTimeUTC = Encoding.UTF8.GetBytes(currentTimeUTC);
+                var options = new DistributedCacheEntryOptions()
+                    .SetSlidingExpiration(TimeSpan.FromSeconds(20));
+                distributedCache.SetString("toursCount", tourString, options);
+            }
+            else
+            {
+                model.ToursCount = JsonConvert.DeserializeObject<List<CountryViewModel>>(distributedCache.GetString("toursCount"));
             }
 
             return View(model);
@@ -131,20 +150,89 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
                 model.Regions = new SelectList(regionLogic.GetRegions().ToList(), "Region_Id", "Title");
                 model.Cities = new SelectList(cityLogic.GetCities().ToList(), "City_Id", "Title");
                 model.Countries = new SelectList(countryLogic.GetCountries().ToList(), "Country_Id", "Title");
-                
-                foreach (var item in model.Countries)
+
+                if (string.IsNullOrEmpty(distributedCache.GetString("toursCount")))
                 {
-                    model.ToursCount.Add(item.Text, tourLogic.GetToursByCountryId(Convert.ToInt32(item.Value)).ToArray().Length);
+                    foreach (var item in model.Countries)
+                    {
+                        model.ToursCount.Add(new CountryViewModel()
+                        {
+                            CountryTitle = item.Text,
+                            TourCount = tourLogic.GetToursByCountryId(Convert.ToInt32(item.Value)).ToArray().Length
+                        });
+                    }
+                    var tourString = JsonConvert.SerializeObject(model.ToursCount);
+                    var currentTimeUTC = DateTime.UtcNow.ToString();
+                    byte[] encodedCurrentTimeUTC = Encoding.UTF8.GetBytes(currentTimeUTC);
+                    var options = new DistributedCacheEntryOptions()
+                        .SetSlidingExpiration(TimeSpan.FromSeconds(20));
+                    distributedCache.SetString("toursCount", tourString, options);
+                }
+                else
+                {
+                    model.ToursCount = JsonConvert.DeserializeObject<List<CountryViewModel>>(distributedCache.GetString("toursCount"));
                 }
 
-                if(model.Area_Id == null || model.City_Id == null || model.Region_Id == null || model.Country_Id == null)
+                if (model.Area_Id == null || model.City_Id == null || model.Region_Id == null || model.Country_Id == null)
                 {
+                    List<int> searchtoursId = new List<int>();
+
+                    if (string.IsNullOrEmpty(distributedCache.GetString(model.Country_Id + model.Region_Id + model.Area_Id + model.City_Id
+                        + model.CostStart + model.CostEnd + model.StartDate.ToString() + model.DateCount)))
+                    {
+                        var toursres = mapper.Map<List<TourViewModel>>(
+                            tourLogic.GetToursBySearchParametrs(model.Country_Id, model.Region_Id, model.Area_Id,
+                            model.City_Id, model.CostStart, model.CostEnd, model.StartDate, model.DateCount).ToList());
+                        searchtoursId = toursres.Select(p => p.Tour_Id).ToList();
+                        var tourString = JsonConvert.SerializeObject(searchtoursId);
+                        var currentTimeUTC = DateTime.UtcNow.ToString();
+                        byte[] encodedCurrentTimeUTC = Encoding.UTF8.GetBytes(currentTimeUTC);
+                        var options = new DistributedCacheEntryOptions()
+                            .SetSlidingExpiration(TimeSpan.FromSeconds(20));
+                        distributedCache.SetString(model.Country_Id + model.Region_Id + model.Area_Id + model.City_Id
+                        + model.CostStart + model.CostEnd + model.StartDate.ToString() + model.DateCount, tourString, options);
+                    }
+                    else
+                    {
+                        searchtoursId = JsonConvert.DeserializeObject<List<int>>(distributedCache.GetString(model.Country_Id
+                        + model.Region_Id + model.Area_Id + model.City_Id + model.CostStart + model.CostEnd
+                        + model.StartDate.ToString() + model.DateCount));
+                        var searhtours = new List<TourViewModel>();
+                        foreach (var item in searchtoursId)
+                        {
+                            searhtours.Add(mapper.Map<TourViewModel>(tourLogic.GetTourById(item)));
+                        }
+
+                        return View("SearchResult", searhtours);
+                    }
+
                     return View("SearchResult", mapper.Map<List<TourViewModel>>(
                             tourLogic.GetToursBySearchParametrs(model.Country_Id, model.Region_Id, model.Area_Id, 
                             model.City_Id,model.CostStart, model.CostEnd, model.StartDate, model.DateCount).ToList()));
                 }
 
                 return View(model);
+            }
+
+            if (string.IsNullOrEmpty(distributedCache.GetString(model.Country_Id + model.Region_Id + model.Area_Id + model.City_Id
+                + model.CostStart + model.CostEnd + model.StartDate.ToString() + model.DateCount)))
+            {
+                var tours = mapper.Map<List<TourViewModel>>(
+                    tourLogic.GetToursBySearchParametrs(model.Country_Id, model.Region_Id, model.Area_Id,
+                    model.City_Id, model.CostStart, model.CostEnd, model.StartDate, model.DateCount).ToList());
+                var tourString = JsonConvert.SerializeObject(tours);
+                var currentTimeUTC = DateTime.UtcNow.ToString();
+                byte[] encodedCurrentTimeUTC = Encoding.UTF8.GetBytes(currentTimeUTC);
+                var options = new DistributedCacheEntryOptions()
+                    .SetSlidingExpiration(TimeSpan.FromSeconds(20));
+                distributedCache.SetString(model.Country_Id + model.Region_Id + model.Area_Id + model.City_Id
+                + model.CostStart + model.CostEnd + model.StartDate.ToString() + model.DateCount, tourString, options);
+            }
+            else
+            {
+                return View("SearchResult", JsonConvert.DeserializeObject<List<TourViewModel>>(distributedCache.GetString(model.Country_Id
+                + model.Region_Id + model.Area_Id + model.City_Id + model.CostStart + model.CostEnd
+                + model.StartDate.ToString() + model.DateCount)));
             }
 
             return View("SearchResult", mapper.Map<List<TourViewModel>>(

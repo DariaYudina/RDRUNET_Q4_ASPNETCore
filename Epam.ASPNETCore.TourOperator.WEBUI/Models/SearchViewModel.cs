@@ -19,7 +19,7 @@ namespace Epam.ASPNETCore.TourOperator.WEBUI.Models
         public List<string> RandomTourImages { get; set; } = new List<string>();
         public List<TourViewModel> RandomTours { get; set; } = new List<TourViewModel>();
 
-        public Dictionary<string, int> ToursCount { get; set; } = new Dictionary<string, int>();
+        public List<CountryViewModel> ToursCount { get; set; } = new List<CountryViewModel>();
 
         public SelectList Countries { get; set; }
 

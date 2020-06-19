@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StackExchange.Redis;
 
 namespace Epam.ASPNETCore.TourOperator.WEBUI
 {
@@ -42,9 +43,10 @@ namespace Epam.ASPNETCore.TourOperator.WEBUI
             services.AddAutoMapper(typeof(Startup));
             services.AddDistributedRedisCache(options =>
             {
-                options.Configuration = "localhost:6379";
+                options.Configuration = "localhost";
                 options.InstanceName = "RedisInstance";
             });
+
 
         }
 
