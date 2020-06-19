@@ -175,30 +175,36 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
 
                 if (model.Area_Id == null || model.City_Id == null || model.Region_Id == null || model.Country_Id == null)
                 {
-                    List<int> searchtoursId = new List<int>();
+                    List<int> searchtoursId2 = new List<int>();
 
-                    if (string.IsNullOrEmpty(distributedCache.GetString(model.Country_Id + model.Region_Id + model.Area_Id + model.City_Id
-                        + model.CostStart + model.CostEnd + model.StartDate.ToString() + model.DateCount)))
+                    if (string.IsNullOrEmpty(distributedCache.GetString(
+                          model.Country_Id 
+                        + model.Region_Id 
+                        + model.Area_Id 
+                        + model.City_Id + "" )))
                     {
                         var toursres = mapper.Map<List<TourViewModel>>(
                             tourLogic.GetToursBySearchParametrs(model.Country_Id, model.Region_Id, model.Area_Id,
-                            model.City_Id, model.CostStart, model.CostEnd, model.StartDate, model.DateCount).ToList());
-                        searchtoursId = toursres.Select(p => p.Tour_Id).ToList();
-                        var tourString = JsonConvert.SerializeObject(searchtoursId);
+                            model.City_Id, null, null, null, null).ToList());
+                        var tourByFilter = toursres.Where(u => u.Cost >= model.CostStart && u.Cost <= model.CostEnd
+                            || u.StartDate == model.StartDate
+                            || u.DateCount == model.DateCount);
+                        searchtoursId2 = tourByFilter.Select(p => p.Tour_Id).ToList();
+                        var tourString = JsonConvert.SerializeObject(searchtoursId2);
                         var currentTimeUTC = DateTime.UtcNow.ToString();
                         byte[] encodedCurrentTimeUTC = Encoding.UTF8.GetBytes(currentTimeUTC);
                         var options = new DistributedCacheEntryOptions()
                             .SetSlidingExpiration(TimeSpan.FromSeconds(20));
                         distributedCache.SetString(model.Country_Id + model.Region_Id + model.Area_Id + model.City_Id
-                        + model.CostStart + model.CostEnd + model.StartDate.ToString() + model.DateCount, tourString, options);
+                        + "", tourString, options);
                     }
                     else
                     {
-                        searchtoursId = JsonConvert.DeserializeObject<List<int>>(distributedCache.GetString(model.Country_Id
-                        + model.Region_Id + model.Area_Id + model.City_Id + model.CostStart + model.CostEnd
-                        + model.StartDate.ToString() + model.DateCount));
+                        searchtoursId2 = JsonConvert.DeserializeObject<List<int>>(distributedCache.GetString(model.Country_Id
+                        + model.Region_Id + model.Area_Id + model.City_Id + ""));
                         var searhtours = new List<TourViewModel>();
-                        foreach (var item in searchtoursId)
+                        foreach (var item in searchtoursId2
+                            )
                         {
                             searhtours.Add(mapper.Map<TourViewModel>(tourLogic.GetTourById(item)));
                         }
@@ -214,25 +220,41 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
                 return View(model);
             }
 
-            if (string.IsNullOrEmpty(distributedCache.GetString(model.Country_Id + model.Region_Id + model.Area_Id + model.City_Id
-                + model.CostStart + model.CostEnd + model.StartDate.ToString() + model.DateCount)))
+            List<int> searchtoursId = new List<int>();
+
+            if (string.IsNullOrEmpty(distributedCache.GetString(
+                  model.Country_Id
+                + model.Region_Id
+                + model.Area_Id
+                + model.City_Id + "")))
             {
-                var tours = mapper.Map<List<TourViewModel>>(
+                var toursres = mapper.Map<List<TourViewModel>>(
                     tourLogic.GetToursBySearchParametrs(model.Country_Id, model.Region_Id, model.Area_Id,
-                    model.City_Id, model.CostStart, model.CostEnd, model.StartDate, model.DateCount).ToList());
-                var tourString = JsonConvert.SerializeObject(tours);
+                    model.City_Id, null, null, null, null).ToList());
+                var tourByFilter = toursres.Where(u => u.Cost >= model.CostStart && u.Cost <= model.CostEnd
+                    || u.StartDate == model.StartDate
+                    || u.DateCount == model.DateCount);
+                searchtoursId = tourByFilter.Select(p => p.Tour_Id).ToList();
+                var tourString = JsonConvert.SerializeObject(searchtoursId);
                 var currentTimeUTC = DateTime.UtcNow.ToString();
                 byte[] encodedCurrentTimeUTC = Encoding.UTF8.GetBytes(currentTimeUTC);
                 var options = new DistributedCacheEntryOptions()
                     .SetSlidingExpiration(TimeSpan.FromSeconds(20));
                 distributedCache.SetString(model.Country_Id + model.Region_Id + model.Area_Id + model.City_Id
-                + model.CostStart + model.CostEnd + model.StartDate.ToString() + model.DateCount, tourString, options);
+                + "", tourString, options);
             }
             else
             {
-                return View("SearchResult", JsonConvert.DeserializeObject<List<TourViewModel>>(distributedCache.GetString(model.Country_Id
-                + model.Region_Id + model.Area_Id + model.City_Id + model.CostStart + model.CostEnd
-                + model.StartDate.ToString() + model.DateCount)));
+                searchtoursId = JsonConvert.DeserializeObject<List<int>>(distributedCache.GetString(model.Country_Id
+                + model.Region_Id + model.Area_Id + model.City_Id + ""));
+                var searhtours = new List<TourViewModel>();
+                foreach (var item in searchtoursId
+                    )
+                {
+                    searhtours.Add(mapper.Map<TourViewModel>(tourLogic.GetTourById(item)));
+                }
+
+                return View("SearchResult", searhtours);
             }
 
             return View("SearchResult", mapper.Map<List<TourViewModel>>(
