@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>Epam.ASPNETCore.TourOperator.WEBUI</AssemblyName>
+    <StartupObject>Epam.ASPNETCore.TourOperator.WEBUI.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +20,19 @@
     <ProjectReference Include="..\Epam.ASPNETCore.TourOperator.IBLL\Epam.ASPNETCore.TourOperator.IBLL.csproj" />
     <ProjectReference Include="..\Epam.ASPNETCore.TourOperator.IDAL\Epam.ASPNETCore.TourOperator.IDAL.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="appsettings.Production.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  
 
 
 
