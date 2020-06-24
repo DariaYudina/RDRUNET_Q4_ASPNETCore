@@ -1,31 +1,31 @@
-﻿using Epam.ASPNETCore.TourOperator.BLL;
+using Epam.ASPNETCore.TourOperator.BLL;
 using Epam.ASPNETCore.TourOperator.Entities;
 using Epam.ASPNETCore.TourOperator.IDAL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Transactions;
 
 namespace Epam.ASPNetCore.TourOperator.UnitTests
 {
     [TestClass]
-    class TourOperatorLogicTests
+    public class ToutOperatorUnitTest
     {
-
         private RegionLogic _regionLogic;
-        private Mock<IRegionDao> _regionDaoMock;
+        private AreaLogic _areaLogic;
         private CityLogic _cityLogic;
+        private Mock<IRegionDao> _regionDaoMock;
+        private Mock<IAreaDao> _areaDaoMock;
         private Mock<ICityDao> _cityDaoMock;
 
         [TestInitialize]
         public void Initialize()
         {
             _regionDaoMock = new Mock<IRegionDao>();
-            _regionLogic = new RegionLogic(_regionDaoMock.Object);
+            _areaDaoMock = new Mock<IAreaDao>();
             _cityDaoMock = new Mock<ICityDao>();
+            _regionLogic = new RegionLogic(_regionDaoMock.Object);
             _cityLogic = new CityLogic(_cityDaoMock.Object);
+            _areaLogic = new AreaLogic(_areaDaoMock.Object);
         }
 
         [TestMethod]
@@ -44,19 +44,33 @@ namespace Epam.ASPNetCore.TourOperator.UnitTests
         }
 
         [TestMethod]
+        public void GetAreasByRegion()
+        {
+            // Arrange
+            List<Area> areas = new List<Area>();
+            _areaDaoMock.Setup(b => b.GetAreasByRegionId(It.IsAny<int>())).Returns(areas);
+
+            // Act
+            int regionId = 1;
+            var res = _areaLogic.GetAreasByRegionId(regionId);
+
+            //Assert
+            Assert.IsTrue(res == areas);
+        }
+
+        [TestMethod]
         public void GetCitiesByArea()
         {
             // Arrange
-            List<City> regions = new List<City>();
-            _cityDaoMock.Setup(b => b.GetCityiesByAreaId(It.IsAny<int>())).Returns(regions);
+            List<City> cities = new List<City>();
+            _cityDaoMock.Setup(b => b.GetCityiesByAreaId(It.IsAny<int>())).Returns(cities);
 
             // Act
             int areaId = 1;
-            var res = _cityDaoMock.g(areaId);
+            var res = _cityLogic.GetCitiesByAreaId(areaId);
 
             //Assert
-            Assert.IsTrue(res == regions);
+            Assert.IsTrue(res == cities);
         }
-
     }
 }
