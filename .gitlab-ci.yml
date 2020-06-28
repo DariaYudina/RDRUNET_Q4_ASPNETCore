@@ -3,3 +3,4 @@ demo_job_1:
        - aspnet_core, dotnetcore
      script:
        - echo Hello World
+     command: dotnet test
