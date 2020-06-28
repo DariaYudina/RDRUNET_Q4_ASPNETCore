@@ -1,0 +1,5 @@
+job_1:
+     tags:
+       - aspnet_core, dotnetcore
+     script:
+       - echo Hello World
