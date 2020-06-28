@@ -1,12 +1,11 @@
-job_1:
-     stages:
-       - dependences
-       - build
-       - test
-     test:
-       stage: test
-       tags:
-         - aspnet_core, dotnetcore
-       command: dotnet test
-       script:
-         - echo Hello World
+stages:
+  - dependences
+  - build
+  - test
+test:
+  stage: test
+  tags:
+    - aspnet_core, dotnetcore
+  command: dotnet test
+  script:
+  - echo Hello World
