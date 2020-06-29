@@ -1,6 +1,0 @@
-demo_job_1:
-     tags:
-       - aspnet_core, dotnetcore
-     script:
-       - echo Hello World
-     command: dotnet test
