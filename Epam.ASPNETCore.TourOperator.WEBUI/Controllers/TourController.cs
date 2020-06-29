@@ -30,6 +30,7 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
         private readonly IRegionLogic regionLogic;
 
         private readonly IAreaLogic areaLogic;
+        //
 
         private readonly ICityLogic cityLogic;
 
