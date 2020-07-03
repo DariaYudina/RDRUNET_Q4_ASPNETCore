@@ -36,7 +36,7 @@ deploy_job:
     - /^feature\/.*$/
   script:
     - "echo deploy..."
-    - "dotnet publish Epam.ASPNetCore.TourOperator.WEBUI -c Release -o ../artifacts/Epam.ASPNetCore.TourOperator.WEBUI -p:PublichProfile-Properties/CI_Pipline_artifacts.pubxml"
+    - "dotnet publish Epam.ASPNetCore.TourOperator.WEBUI -c Release -o ../artifacts/Epam.ASPNetCore.TourOperator.WEBUI -p:PublishProfile=Properties/PublishProfiles/CI_Pipline_artifacts.pubxml"
   artifacts:
    paths:
     - artifacts/Epam.ASPNetCore.TourOperator.WEBUI
