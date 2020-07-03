@@ -1,17 +1,12 @@
-
 variables:
   TEST_FOLDER: 'Epam.ASPNetCore.TourOperator.UnitTests'
-  DEPLOY_FOLDER: 'Builds'
-
 stages:
   - build
   - test
   - deploy
-
 before_script:
   - "Set-Location -Path rdrunet_q4_aspnetcore"
   - "dotnet restore"
-
 build_job:
   stage: build
   tags: 
@@ -22,7 +17,6 @@ build_job:
   script:
     - "echo build..."
     - "dotnet build"
-
 test_job:
   stage: test
   tags: 
@@ -33,10 +27,7 @@ test_job:
   script:
     - "echo test..."
     - "Set-Location -Path $TEST_FOLDER"
-  - "dotnet test
-  dependencies:
-    - build_job
-
+    - "dotnet test"
 deploy_job:
   stage: deploy
   tags: 
@@ -47,10 +38,8 @@ deploy_job:
   script:
     - "echo deploy..."
     - "dotnet publish Epam.ASPNetCore.TourOperator.WEBUI -c Release -o ../artifacts/Epam.ASPNetCore.TourOperator.WEBUI -p:PublichProfile-Properties/CI_Pipline_artifacts.pubxml"
-  dependencies:
-    - build_job
-    - test_job
   artifacts:
    paths:
     - artifacts/Epam.ASPNetCore.TourOperator.WEBUI
    expire_in: 1 days
+
