@@ -24,7 +24,7 @@ namespace Epam.ASPNETCore.TourOperator.Controllers
         private readonly ILogger<TourController> _logger;
 
         private readonly ITourLogic tourLogic;
-        //
+        
         private readonly ICountryLogic countryLogic;
 
         private readonly IRegionLogic regionLogic;

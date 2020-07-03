@@ -26,7 +26,7 @@ test_job:
     - /^feature\/.*$/
   script:
     - "echo test..."
-    - "Set-Location -Path $TEST_FOLDER"
+    - "Set-Location -Path Epam.ASPNetCore.TourOperator.UnitTests"
     - "dotnet test"
 deploy_job:
   stage: deploy
