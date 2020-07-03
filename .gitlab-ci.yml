@@ -33,7 +33,7 @@ deploy_job:
   - aspnet_core
   - dotnetcore
   only:
-    - /^feature\/.*$/
+    - /^develop$/
   script:
     - "echo deploy..."
     - "dotnet publish Epam.ASPNetCore.TourOperator.WEBUI -c Release -o ../artifacts/Epam.ASPNetCore.TourOperator.WEBUI -p:PublishProfile=Properties/PublishProfiles/CI_Pipline_artifacts.pubxml"
