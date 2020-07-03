@@ -1,0 +1,458 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.WEBUI\\Epam.ASPNETCore.TourOperator.WEBUI.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.BLL\\Epam.ASPNETCore.TourOperator.BLL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.BLL\\Epam.ASPNETCore.TourOperator.BLL.csproj",
+        "projectName": "Epam.ASPNETCore.TourOperator.BLL",
+        "projectPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.BLL\\Epam.ASPNETCore.TourOperator.BLL.csproj",
+        "packagesPath": "C:\\Users\\Daria_Iudina\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.BLL\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Daria_Iudina\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.IBLL\\Epam.ASPNETCore.TourOperator.IBLL.csproj": {
+                "projectPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.IBLL\\Epam.ASPNETCore.TourOperator.IBLL.csproj"
+              },
+              "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.IDAL\\Epam.ASPNETCore.TourOperator.IDAL.csproj": {
+                "projectPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.IDAL\\Epam.ASPNETCore.TourOperator.IDAL.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Caching.Redis": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.DAL\\Epam.ASPNETCore.TourOperator.DAL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.DAL\\Epam.ASPNETCore.TourOperator.DAL.csproj",
+        "projectName": "Epam.ASPNETCore.TourOperator.DAL",
+        "projectPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.DAL\\Epam.ASPNETCore.TourOperator.DAL.csproj",
+        "packagesPath": "C:\\Users\\Daria_Iudina\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.DAL\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Daria_Iudina\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.Entities\\Epam.ASPNETCore.TourOperator.Entities.csproj": {
+                "projectPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.Entities\\Epam.ASPNETCore.TourOperator.Entities.csproj"
+              },
+              "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.IDAL\\Epam.ASPNETCore.TourOperator.IDAL.csproj": {
+                "projectPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.IDAL\\Epam.ASPNETCore.TourOperator.IDAL.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.30, )"
+            },
+            "Microsoft.Extensions.Caching.Redis": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.Entities\\Epam.ASPNETCore.TourOperator.Entities.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.Entities\\Epam.ASPNETCore.TourOperator.Entities.csproj",
+        "projectName": "Epam.ASPNETCore.TourOperator.Entities",
+        "projectPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.Entities\\Epam.ASPNETCore.TourOperator.Entities.csproj",
+        "packagesPath": "C:\\Users\\Daria_Iudina\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.Entities\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Daria_Iudina\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Caching.Redis": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.IBLL\\Epam.ASPNETCore.TourOperator.IBLL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.IBLL\\Epam.ASPNETCore.TourOperator.IBLL.csproj",
+        "projectName": "Epam.ASPNETCore.TourOperator.IBLL",
+        "projectPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.IBLL\\Epam.ASPNETCore.TourOperator.IBLL.csproj",
+        "packagesPath": "C:\\Users\\Daria_Iudina\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.IBLL\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Daria_Iudina\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.Entities\\Epam.ASPNETCore.TourOperator.Entities.csproj": {
+                "projectPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.Entities\\Epam.ASPNETCore.TourOperator.Entities.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Caching.Redis": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.IDAL\\Epam.ASPNETCore.TourOperator.IDAL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.IDAL\\Epam.ASPNETCore.TourOperator.IDAL.csproj",
+        "projectName": "Epam.ASPNETCore.TourOperator.IDAL",
+        "projectPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.IDAL\\Epam.ASPNETCore.TourOperator.IDAL.csproj",
+        "packagesPath": "C:\\Users\\Daria_Iudina\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.IDAL\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Daria_Iudina\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.Entities\\Epam.ASPNETCore.TourOperator.Entities.csproj": {
+                "projectPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.Entities\\Epam.ASPNETCore.TourOperator.Entities.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Caching.Redis": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.WEBUI\\Epam.ASPNETCore.TourOperator.WEBUI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.WEBUI\\Epam.ASPNETCore.TourOperator.WEBUI.csproj",
+        "projectName": "Epam.ASPNETCore.TourOperator.WEBUI",
+        "projectPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.WEBUI\\Epam.ASPNETCore.TourOperator.WEBUI.csproj",
+        "packagesPath": "C:\\Users\\Daria_Iudina\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.WEBUI\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Daria_Iudina\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.BLL\\Epam.ASPNETCore.TourOperator.BLL.csproj": {
+                "projectPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.BLL\\Epam.ASPNETCore.TourOperator.BLL.csproj"
+              },
+              "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.DAL\\Epam.ASPNETCore.TourOperator.DAL.csproj": {
+                "projectPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.DAL\\Epam.ASPNETCore.TourOperator.DAL.csproj"
+              },
+              "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.IBLL\\Epam.ASPNETCore.TourOperator.IBLL.csproj": {
+                "projectPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.IBLL\\Epam.ASPNETCore.TourOperator.IBLL.csproj"
+              },
+              "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.IDAL\\Epam.ASPNETCore.TourOperator.IDAL.csproj": {
+                "projectPath": "C:\\Users\\Daria_Iudina\\source\\rdrunet_q4_aspnetcore\\Epam.ASPNETCore.TourOperator.IDAL\\Epam.ASPNETCore.TourOperator.IDAL.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Caching.Redis": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

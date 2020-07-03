@@ -1,0 +1,165 @@
+﻿@model SearchViewModel
+@{
+    ViewData["Title"] = "Tour Page";
+}
+
+<div @*class="text-center"*@>
+    <h5 class="display-6">Случайные предложения</h5>
+    <div class="cards">
+        @foreach (var tour in Model.RandomTours)
+        {
+            <div class="mycard ">
+                <a href="#">
+                    <img src="@tour.Image" asp-append-version="true" />
+                </a>
+            </div>
+        }
+        <div class="mycard">
+            <ul>
+                @foreach (var item in Model.ToursCount)
+                {
+                    if (item.TourCount != 0)
+                    {
+                        <li>@item.CountryTitle (@item.TourCount)</li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+    <h5 class="display-6">Расширенный поиск</h5>
+    <form asp-action="Index" asp-controller="Tour" asp-antiforgery="true" class="search-form">
+        <div class="validation" asp-validation-summary="ModelOnly" />
+        <div class="selects">
+            <div class="select countrySelect">
+                <select class="country" asp-for="Country_Id" asp-items="Model.Countries">
+                    <option selected="selected">Страны</option>
+                </select>
+            </div>
+            <div class="select regionSelect">
+                <select class="region" asp-for="Region_Id" asp-items="Model.Regions">
+                    <option selected="selected">Регионы</option>
+                </select>
+            </div>
+            <div class="select areaSelect">
+                <select class="area" asp-for="Area_Id" asp-items="Model.Areas">
+                    <option selected="selected">Районы</option>
+                </select>
+            </div>
+            <div class="select">
+                <select class="city" asp-for="City_Id" asp-items="Model.Cities">
+                    <option selected="selected">Города</option>
+                </select>
+            </div>
+        </div>
+        <div class="selects">
+            <div>
+                <input asp-for="CostStart" type="number" min="0"  placeholder="Цена от"/>
+                <span asp-validation-for="CostStart" />
+            </div>
+            <div>
+                <input asp-for="CostEnd" type="number" min="0"  placeholder="Цена до"/>
+                <span asp-validation-for="CostEnd" />
+            </div>
+            <div>
+                <input type="date" asp-for="StartDate" placeholder="Дата отъезда" type="text" onfocus="(this.type='date')"/>
+            </div>
+            <div>
+                <input asp-for="DateCount" type="number" min="0" placeholder="Количество дней"/>
+            </div>
+        </div>
+        <div class="search-button">
+            <input type="submit" value="Search" class="inputSearchButton"/>
+        </div>
+    </form>
+
+    @*Добавление туров для теста*@
+    @*<form asp-action="Index" enctype="multipart/form-data">
+
+            <input asp-for="ImageCaption" />
+            <input asp-for="ImageDescription" />
+            <input asp-for="MyImage" accept="image/*" />
+
+            <input type="submit" />
+        </form>*@
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.countrySelect').on('change', '.country', function () {
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("GetRegionsByCountryId")",
+                    data: {countryId: $( ".country" ).val()},
+                    dataType: "json",
+                    success: function (data) {
+                        $('.region').empty();
+                        $('.region').append($('<option selected="selected">Регионы</option>'));
+                        $.each(data, function(key, entry) {
+	                        $('.region').append($('<option></option>').attr('value', entry.region_Id).text(entry.title));
+                        });
+                        //$('.region').removeAttr('disabled');
+                        $('.area').empty();
+                        $('.area').append($('<option selected="selected">Районы</option>'));
+                        //$('.area').prop( "disabled", true );
+                        $('.city').empty();
+                        $('.city').append($('<option selected="selected">Города</option>'));
+                        //$('.city').prop( "disabled", true );
+                    },
+                    error: function (req, status, error) {
+                        alert(error);
+                    }
+                });
+
+                //if (!$(".country").val()) {
+                //    $('.inputSearchButton').prop("disabled", true);
+                //} else {
+                //    $('.inputSearchButton').removeAttr('disabled');
+                //}
+            });
+
+            $('.regionSelect').on('change', '.region', function () {
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("GetAreasByRegionId")",
+                    data: {regionId: $( ".region" ).val()},
+                    dataType: "json",
+                    success: function (data) {
+                        $('.area').empty();
+                        $('.area').append($('<option selected="selected">Районы</option>'));
+                        $.each(data, function(key, entry) {
+	                        $('.area').append($('<option></option>').attr('value', entry.area_Id).text(entry.title));
+                        });
+                        //$('.area').removeAttr('disabled');
+                        $('.city').empty();
+                        $('.city').append($('<option selected="selected">Города</option>'));
+                        //$('.city').prop( "disabled", true );
+                    },
+                    error: function (req, status, error) {
+                        alert(error);
+                    }
+                });
+            });
+
+            $('.areaSelect').on('change', '.area', function () {
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("GetCitiesByAreaId")",
+                data: {areaId: $( ".area" ).val()},
+                dataType: "json",
+                success: function (data) {
+                    $('.city').empty();
+                    $('.city').append($('<option selected="selected">Города</option>'));
+                    $.each(data, function(key, entry) {
+	                    $('.city').append($('<option></option>').attr('value', entry.city_Id).text(entry.title));
+                    });
+                    //$('.city').removeAttr('disabled');
+                },
+                error: function (req, status, error) {
+                    alert(error);
+                }
+            });
+        });
+    });
+    </script>
+}

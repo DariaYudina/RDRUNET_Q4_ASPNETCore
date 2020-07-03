@@ -1,0 +1,44 @@
+variables:
+  TEST_FOLDER: 'Epam.ASPNetCore.TourOperator.UnitTests'
+stages:
+  - build
+  - test
+  - deploy
+build_job:
+  stage: build
+  tags: 
+  - aspnet_core
+  - dotnetcore
+  only:
+    - /^feature\/.*$/
+  script:
+    - "echo build..."
+    - "Set-Location -Path Epam.ASPNETCore.TourOperator.WEBUI"
+    - "dotnet restore"
+    - "dotnet build"
+test_job:
+  stage: test
+  tags: 
+  - aspnet_core
+  - dotnetcore
+  only:
+    - /^feature\/.*$/
+  script:
+    - "echo test..."
+    - "Set-Location -Path Epam.ASPNetCore.TourOperator.UnitTests"
+    - "dotnet test"
+deploy_job:
+  stage: deploy
+  tags: 
+  - aspnet_core
+  - dotnetcore
+  only:
+    - /^develop$/
+  script:
+    - "echo deploy..."
+    - "dotnet publish Epam.ASPNetCore.TourOperator.WEBUI -c Release -o ../artifacts/Epam.ASPNetCore.TourOperator.WEBUI -p:PublishProfile=Properties/PublishProfiles/CI_Pipline_artifacts.pubxml"
+  artifacts:
+   paths:
+    - artifacts/Epam.ASPNetCore.TourOperator.WEBUI
+   expire_in: 1 days
+
