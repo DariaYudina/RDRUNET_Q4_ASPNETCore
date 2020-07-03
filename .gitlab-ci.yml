@@ -5,7 +5,7 @@ stages:
   - test
   - deploy
 before_script:
-  - "Set-Location -Path rdrunet_q4_aspnetcore"
+  - "Set-Location -Path Epam.ASPNETCore.TourOperator.WEBUI"
   - "dotnet restore"
 build_job:
   stage: build
